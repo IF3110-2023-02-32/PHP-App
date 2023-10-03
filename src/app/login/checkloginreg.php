@@ -1,4 +1,16 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST, GET, DELETE, PUT, PATCH, OPTIONS');
+    header('Access-Control-Allow-Headers: token, Content-Type');
+    header('Access-Control-Max-Age: 1728000');
+    header('Content-Length: 0');
+    header('Content-Type: text/plain');
+    die();
+}
+
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
 function connectDB() : PDO {
     $host = "localhost";
     $dbname = "wbd";
@@ -28,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             for($i=0;$i<count($data_database);$i++){
                 if($data_database[$i]['username'] === $username && password_verify($password, $data_database[$i]['password_hashed'])){
                     $response = array("status" => "sukses", "message" => "Login berhasil", "role" => $data_database[$i]['role']);
-                    header('Content-Type: application/json');
                     $get = 1;
+                    header('Content-Type: application/json');
                     echo json_encode($response);
                     break;
                 }
@@ -53,8 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             for($i=0;$i<count($data_database);$i++){
                 if($data_database[$i]['username'] == $username){
                     $response = array("status" => "error", "message" => "Username sudah terdaftar");
-                    header('Content-Type: application/json');
                     $get = 1;
+                    header('Content-Type: application/json');
                     echo json_encode($response);
                     break;
                 }
