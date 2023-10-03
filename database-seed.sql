@@ -45,6 +45,7 @@ CREATE TABLE "posts" (
 
   CONSTRAINT no_self_refer CHECK (refer_post <> id AND refer_post_owner <> owner_id)
 );
+-- CURRENT IMPLEMENTATION ONLY ACCEPTS "refer_type" values of {'Repost', 'Reply'}
 
 CREATE TABLE "tags" (
   "post_id" integer,
@@ -130,19 +131,19 @@ CREATE TRIGGER add_user_detail
   FOR EACH ROW
   EXECUTE FUNCTION add_user_detail();
 
-CREATE FUNCTION validate_role() RETURNS TRIGGER AS $$
-  BEGIN
-    IF (NEW.role NOT IN (SELECT role FROM user_roles)) THEN
-      RAISE NOTICE 'Role not found!';
-      RETURN NULL;
-    END IF;
-    RETURN NEW;
-  END;
-$$ LANGUAGE plpgsql;
+-- CREATE FUNCTION validate_role() RETURNS TRIGGER AS $$
+--   BEGIN
+--     IF (NEW.role NOT IN (SELECT role FROM user_roles)) THEN
+--       RAISE NOTICE 'Role not found!';
+--       RETURN NULL;
+--     END IF;
+--     RETURN NEW;
+--   END;
+-- $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER validate_role
-  BEFORE INSERT OR UPDATE ON users
-  EXECUTE FUNCTION validate_role();
+-- CREATE TRIGGER validate_role
+--   BEFORE INSERT OR UPDATE ON users
+--   EXECUTE FUNCTION validate_role();
 
 CREATE FUNCTION next_post_id(user_id int) RETURNS INTEGER AS $$
   BEGIN
