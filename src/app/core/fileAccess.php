@@ -32,12 +32,10 @@ class fileAccess
     }
 
     /**
-     * Returns the file type (e.g. video, audio) of specified file
+     * Returns the file type (e.g. video, audio) based of MIME type
      */
-    public function getFileType(string $filename)
+    public function getFileTypeFromMIME(string $mimetype)
     {
-        $mimetype = mime_content_type($filename); // get file MIME type
-
         foreach (SUPPORTED_FILES as $filetype => $mimetoext) {
             if (in_array($mimetype, array_keys($mimetoext))) {
                 return $filetype;
@@ -47,10 +45,24 @@ class fileAccess
         return null;
     }
 
-    public function saveFile(string $filename)
+    /**
+     * Returns the file type (e.g. video, audio) of specified file name
+     */
+    public function getFileType(string $filename)
     {
         $mimetype = mime_content_type($filename); // get file MIME type
-        $filetype = $this->getFileType($filename);
+
+        return $this->getFileTypeFromMIME($mimetype);
+    }
+
+    /**
+     * Saves the file to its corresponding categorized directory.
+     * Returns the new file name due to renaming for collision prevention
+     */
+    public function saveFileAuto(string $filename)
+    {
+        $mimetype = mime_content_type($filename); // get file MIME type
+        $filetype = $this->getFileTypeFromMIME($mimetype);
 
         // Check the file type, if not supported, throw exception
         if (is_null($filetype)) {
