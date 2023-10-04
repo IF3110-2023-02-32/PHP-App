@@ -79,11 +79,17 @@ class fileAccess
 
     /**
      * Delete the specified file
-     * specify $filetypedir to delete filename in specified directory associated with file type
+     * specify $filetype to delete filename in specified directory associated with file type
      */
-    public function deleteFile($filename, $filetypedir = '')
+    public function deleteFile($filename, $filetype = null)
     {
-        $filepath = $filetypedir . $filename;
+        if (is_null($filetype)) {
+            $filepath = fileAccess::FILE_TYPE_PATH[$filetype] . $filename;
+        }
+        else {
+            $filepath = $filename;
+        }
+        
         if (!$this->doesFileExist($filepath)) {
             return;
         }
