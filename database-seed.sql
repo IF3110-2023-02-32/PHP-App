@@ -4,6 +4,7 @@ CREATE TABLE "users" (
   "profile_name" varchar NOT NULL,
   "password_hashed" varchar NOT NULL,
   "role" varchar NOT NULL,
+  "status" varchar DEFAULT null,
   "profile_picture_path" varchar,
   "created_at" timestamp DEFAULT current_timestamp,
 
@@ -78,6 +79,8 @@ CREATE TABLE "likes" (
 );
 
 COMMENT ON COLUMN "users"."id" IS 'Starts at 1';
+
+COMMENT ON COLUMN "users"."status" IS 'null status represents normal user';
 
 COMMENT ON COLUMN "posts"."id" IS 'Starts at 0';
 
