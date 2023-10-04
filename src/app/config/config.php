@@ -9,7 +9,10 @@ define('HOUR', 3600);
 define('DBNAME', $_ENV['POSTGRES_DB']);
 define('DBUSER', $_ENV['POSTGRES_USER'] ?? 'postgres');
 define('DBPASSWORD', $_ENV['POSTGRES_PASSWORD']);
+define('DBHOST', $_ENV['POSTGRES_HOST']);
 define('DBPORT', $_ENV['POSTGRES_PORT']);
+
+define('CONNECT_RETRIES', 4);
 
 /* -- Static File Configuration -- */
 // Videos
