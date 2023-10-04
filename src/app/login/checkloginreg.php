@@ -23,9 +23,9 @@ class LoginRegistrasi{
         $db = new PDO("pgsql:host=$host;dbname=$dbname", $username, $password);
         return $db;
     }
-    function login(){
+    function login($db){
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $koneksi = $this->connect_db();
+            $koneksi = $db;
             $query = "SELECT * FROM users";
             $result = $koneksi->query($query);
             $data_database = $result->fetchAll();
@@ -59,10 +59,10 @@ class LoginRegistrasi{
             }
         }
     }
-    function registrasi(){
+    function registrasi($db){
         try{
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $koneksi = $this->connect_db();
+                $koneksi = $db;
                 $query = "SELECT * FROM users";
                 $result = $koneksi->query($query);
                 $data_database = $result->fetchAll();
@@ -108,9 +108,10 @@ class LoginRegistrasi{
     }
 }
 
-$loginregistrasi = new LoginRegistrasi();
-$loginregistrasi->login();
-$loginregistrasi->registrasi();
+// $loginregistrasi = new LoginRegistrasi();
+// $db = $loginregistrasi->connect_db();
+// $loginregistrasi->login($db);
+// $loginregistrasi->registrasi($db);
 
 
 ?>
