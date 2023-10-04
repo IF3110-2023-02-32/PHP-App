@@ -16,20 +16,32 @@ define('CONNECT_RETRIES', 4);
 
 /* -- Static File Configuration -- */
 // Videos
-define('MAX_VIDEO_SIZE', 100 * MEGABYTE);
-define('ALLOWED_VIDEOS', [
-    'video/mp4' => '.mp4'
-]);
+define('VIDEO_TYPE', 'video');
+define('MAX_VIDEO_SIZE', 50 * MEGABYTE);
 // Audios
-define('MAX_AUDIO_SIZE', 100 * MEGABYTE);
-define('ALLOWED_AUDIOS', [
-    'audio/mpeg' => '.mp3'
-]);
+define('AUDIO_TYPE', 'audio');
+define('MAX_AUDIO_SIZE', 20 * MEGABYTE);
 // Images
-define('MAX_IMAGE_SIZE', 100 * MEGABYTE);
-define('ALLOWED_IMAGES', [
-    'image/jpeg' => '.jpeg',
-    'image/png' => '.png'
+define('IMAGE_TYPE', 'image');
+define('MAX_IMAGE_SIZE', 20 * MEGABYTE);
+
+define('MAX_FILE_SIZE', [
+    VIDEO_TYPE => MAX_VIDEO_SIZE,
+    AUDIO_TYPE => MAX_AUDIO_SIZE,
+    IMAGE_TYPE => MAX_IMAGE_SIZE
+]);
+
+define('SUPPORTED_FILES', [
+    VIDEO_TYPE => [
+        'video/mp4' => '.mp4'
+    ],
+    AUDIO_TYPE => [
+        'audio/mpeg' => '.mp3'
+    ],
+    IMAGE_TYPE => [
+        'image/jpeg' => '.jpeg',
+        'image/png' => '.png'
+    ]
 ]);
 
 /* -- Session Configuration -- */
