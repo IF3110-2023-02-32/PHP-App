@@ -8,7 +8,7 @@ class Database
     private $password = DBPASSWORD;
     private $port = DBPORT;
 
-    private $db_pdo_connection;
+    private $pdo_connection;
 
     private $statement;
 
@@ -25,10 +25,22 @@ class Database
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ];
 
-        try {
-            $this->db_connection = new PDO($dsn, $this->user, $this->password, $option);
-        } catch (PDOException) {
-            throw new LoggedException('Bad Gateway', 502);
+        $retry = CONNECT_RETRIES;
+        while(retry){
+            try {
+                $retry--;
+                $this->pdo_connection = new PDO($dsn, $this->user, $this->password, $option);
+            } catch (PDOException) {
+                throw new LoggedException('Bad Gateway', 502);
+            }
+            $retry = 0;
         }
     }
+
+    public function getConnection()
+    {
+        return $this->pdo_connection;
+    }
+
+    
 }
