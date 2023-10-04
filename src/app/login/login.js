@@ -19,41 +19,28 @@ document.getElementById('tmblbuatlogin').addEventListener('click', function() {
         alert("Username atau password tidak boleh kosong");
     }
     else{
-        const apiUrl = 'http://localhost:8080/checkloginreg.php/login';
-        const requestData = {
-        username: usernameambil,
-        password: passwordambil
+        const url = '/checkloginreg.php/login';
+        var xhr = new XMLHttpRequest();
+        var data = JSON.stringify({ username: usernameambil, password: passwordambil });
+
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var responseData = JSON.parse(xhr.responseText);
+                if(responseData.role==="admin"){
+                    window.location.href = "admin.html";
+                }
+                else if(responseData.role==="user"){
+                    window.location.href = "user.html";
+                }
+                else if(responseData.status==="error"){
+                    alert("Username atau password salah");
+                }
+            }
         };
-        const requestOptions = {
-        method: 'POST', 
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestData)
-        };
-        fetch(apiUrl, requestOptions)
-        .then(response => {
-            if (!response.ok) {
-            throw new Error('Terjadi kesalahan dalam mengambil data');
-            }
-            return response.json();
-        })
-        .then(data => {
-            responseData = data;
-            console.log('Data dari API:', responseData.role);
-            if(responseData.role==="admin"){
-                window.location.href = "admin.html";
-            }
-            else if(responseData.role==="user"){
-                window.location.href = "user.html";
-            }
-            else if(responseData.status==="error"){
-                alert("Username atau password salah");
-            }
-        })
-        .catch(error => {
-            console.error('Terjadi kesalahan:', error);
-        });
+        xhr.send(data);
     }
     
 });
@@ -73,40 +60,26 @@ document.getElementById('tmblreg').addEventListener('click', function() {
         alert("Username atau password minimal 5 karakter");
     }
     else{
-        const apiUrl = 'http://localhost:8080/checkloginreg.php/register';
-        const requestData = {
-        username: userreg,
-        password: passreg,
-        nama: namareg
+        const url = '/checkloginreg.php/register';
+        var xhr = new XMLHttpRequest();
+        var data = JSON.stringify({ username: userreg, password: passreg, nama: namareg });
+
+        xhr.open('POST', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var responseData = JSON.parse(xhr.responseText);
+                if(responseData.status==="error"){
+                    alert(responseData.message);
+                }
+                else if(responseData.status==="sukses"){
+                    alert("Data berhasil ditambahkan");
+                    window.location.href = "login.html";
+                }
+            }
         };
-        const requestOptions = {
-        method: 'POST', 
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestData)
-        };
-        fetch(apiUrl, requestOptions)
-        .then(response => {
-            if (!response.ok) {
-            throw new Error('Terjadi kesalahan dalam mengambil data');
-            }
-            return response.json();
-        })
-        .then(data => {
-            responseData = data;
-            console.log('Data dari API:', responseData.role);
-            if(responseData.status==="error"){
-                alert(responseData.message);
-            }
-            else if(responseData.status==="sukses"){
-                alert("Data berhasil ditambahkan");
-                window.location.href = "login.html";
-            }
-        })
-        .catch(error => {
-            console.error('Terjadi kesalahan:', error);
-        });
+        xhr.send(data);
     }   
 });
 
