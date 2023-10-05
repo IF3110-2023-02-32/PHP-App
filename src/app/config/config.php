@@ -1,9 +1,9 @@
 <?php
 
 /* -- CONSTANTS -- */
-define('MEGABYTE', 1048576); // 1024 * 1024
-define('MINUTE', 60);
-define('HOUR', 3600);
+define('BYTE_MEGABYTE', 1048576); // 1024 * 1024
+define('SECONDS_MINUTE', 60);
+define('SECONDS_HOUR', 3600);
 
 /* -- Database Configuration -- */
 define('DBNAME', $_ENV['POSTGRES_DB']);
@@ -17,13 +17,13 @@ define('CONNECT_RETRIES', 4);
 /* -- Static File Configuration -- */
 // Videos
 define('VIDEO_TYPE', 'video');
-define('MAX_VIDEO_SIZE', 50 * MEGABYTE);
+define('MAX_VIDEO_SIZE', 50 * BYTE_MEGABYTE);
 // Audios
 define('AUDIO_TYPE', 'audio');
-define('MAX_AUDIO_SIZE', 20 * MEGABYTE);
+define('MAX_AUDIO_SIZE', 10 * BYTE_MEGABYTE);
 // Images
 define('IMAGE_TYPE', 'image');
-define('MAX_IMAGE_SIZE', 20 * MEGABYTE);
+define('MAX_IMAGE_SIZE', 10 * BYTE_MEGABYTE);
 
 define('MAX_FILE_SIZE', [
     VIDEO_TYPE => MAX_VIDEO_SIZE,
