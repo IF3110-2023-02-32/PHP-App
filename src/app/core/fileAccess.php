@@ -1,6 +1,6 @@
 <?php
 
-class fileAccess
+class FileAccess
 {
     private $fileDir;
 
@@ -24,7 +24,7 @@ class fileAccess
     }
 
     /**
-     * Returns true if file exist in current fileAccess directory
+     * Returns true if file exist in current FileAccess object directory
      */
     private function doesFileExist(string $filename)
     {
@@ -75,7 +75,7 @@ class fileAccess
             throw new LoggedException('Request Entity Too Large', 413);
         }
 
-        $newDir = $this->storageDir . fileAccess::FILE_TYPE_PATH[$filetype];
+        $newDir = $this->storageDir . FileAccess::FILE_TYPE_PATH[$filetype];
         // Generate new file name to keep in same directory to prevent overwriting 
         do {
             $newfilename = md5(uniqid(mt_rand(), true)) . (SUPPORTED_FILES[$filetype])[$mimetype];
@@ -96,7 +96,7 @@ class fileAccess
     public function deleteFile($filename, $filetype = null)
     {
         if (is_null($filetype)) {
-            $filepath = fileAccess::FILE_TYPE_PATH[$filetype] . $filename;
+            $filepath = FileAccess::FILE_TYPE_PATH[$filetype] . $filename;
         }
         else {
             $filepath = $filename;
