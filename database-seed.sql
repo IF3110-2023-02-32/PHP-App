@@ -15,7 +15,7 @@ CREATE TABLE "users" (
 );
 
 CREATE TABLE "users_detail" (
-  "id" SERIAL PRIMARY KEY,
+  "id" integer PRIMARY KEY,
   "banner_path" varchar,
   "bio" text,
   "birth_date" date,
@@ -82,7 +82,7 @@ COMMENT ON COLUMN "users"."id" IS 'Starts at 1';
 
 COMMENT ON COLUMN "users"."status" IS 'null status represents normal user';
 
-COMMENT ON COLUMN "posts"."id" IS 'Starts at 0';
+COMMENT ON COLUMN "posts"."post_id" IS 'Starts at 0';
 
 COMMENT ON COLUMN "posts"."body" IS 'Content of the post';
 
