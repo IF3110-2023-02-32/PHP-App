@@ -3,7 +3,7 @@
 class Database
 {
     private $host = DBHOST;
-    private $db_name = DBNAME;
+    private $dbname = DBNAME;
     private $user = DBUSER;
     private $password = DBPASSWORD;
     private $port = DBPORT;
