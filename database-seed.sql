@@ -35,16 +35,16 @@ CREATE TABLE "follows" (
 );
 
 CREATE TABLE "posts" (
-  "id" integer,
+  "post_id" integer,
   "owner_id" integer,
   "body" text,
   "created_at" timestamp DEFAULT current_timestamp,
   "refer_type" varchar DEFAULT null,
   "refer_post" integer DEFAULT null,
   "refer_post_owner" integer DEFAULT null,
-  PRIMARY KEY ("id", "owner_id"),
+  PRIMARY KEY ("post_id", "owner_id"),
 
-  CONSTRAINT no_self_refer CHECK (refer_post <> id AND refer_post_owner <> owner_id)
+  CONSTRAINT no_self_refer CHECK (refer_post <> post_id AND refer_post_owner <> owner_id)
 );
 -- CURRENT IMPLEMENTATION ONLY ACCEPTS "refer_type" values of {'Repost', 'Reply'}
 
@@ -106,17 +106,17 @@ ALTER TABLE "follows" ADD FOREIGN KEY ("followed_user_id") REFERENCES "users" ("
 
 ALTER TABLE "posts" ADD FOREIGN KEY ("owner_id") REFERENCES "users" ("id");
 
-ALTER TABLE "posts" ADD FOREIGN KEY ("refer_post", "refer_post_owner") REFERENCES "posts" ("id", "owner_id");
+ALTER TABLE "posts" ADD FOREIGN KEY ("refer_post", "refer_post_owner") REFERENCES "posts" ("post_id", "owner_id");
 
-ALTER TABLE "tags" ADD FOREIGN KEY ("post_id", "owner_id") REFERENCES "posts" ("id", "owner_id");
+ALTER TABLE "tags" ADD FOREIGN KEY ("post_id", "owner_id") REFERENCES "posts" ("post_id", "owner_id");
 
-ALTER TABLE "images" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("id", "owner_id");
+ALTER TABLE "images" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
 
-ALTER TABLE "videos" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("id", "owner_id");
+ALTER TABLE "videos" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
 
-ALTER TABLE "audios" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("id", "owner_id");
+ALTER TABLE "audios" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
 
-ALTER TABLE "likes" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("id", "owner_id");
+ALTER TABLE "likes" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
 
 CREATE INDEX user_post ON posts USING HASH(owner_id);
 
@@ -151,7 +151,7 @@ CREATE TRIGGER add_user_detail
 CREATE FUNCTION next_post_id(user_id int) RETURNS INTEGER AS $$
   BEGIN
     RETURN (
-      SELECT COALESCE((MAX(id) + 1), 0)
+      SELECT COALESCE((MAX(post_id) + 1), 0)
       FROM posts
       WHERE owner_id = user_id
     );
@@ -160,7 +160,7 @@ $$ LANGUAGE plpgsql;
 
 CREATE FUNCTION increment_post_id() RETURNS TRIGGER AS $$
   BEGIN
-    NEW.id := next_post_id(NEW.owner_id);
+    NEW.post_id := next_post_id(NEW.owner_id);
     RETURN NEW;
   END;
 $$ LANGUAGE plpgsql;
