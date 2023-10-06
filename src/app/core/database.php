@@ -2,23 +2,17 @@
 
 class Database
 {
-    private $host = DBHOST;
-    private $dbname = DBNAME;
-    private $user = DBUSER;
-    private $password = DBPASSWORD;
-    private $port = DBPORT;
+    private static $instance;
 
-    private $pdo_connection;
-
-    private $statement;
+    private $pdo;
 
     public function __construct()
     {
-        $dsn = "pgsql:host=" . $this->host .
-               ";port=" . $this->port .
-               ";dbname=" . $this->dbname .
-               ";user=" . $this->user .
-               ";password=" . $this->password;
+        $dsn = "pgsql:host=" . DBHOST .
+               ";port=" . DBPORT .
+               ";dbname=" . DBNAME .
+               ";user=" . DBUSER .
+               ";password=" . DBPASSWORD;
         
         $option = [
             PDO::ATTR_PERSISTENT => true,
@@ -29,18 +23,23 @@ class Database
         while(retry){
             try {
                 $retry--;
-                $this->pdo_connection = new PDO($dsn, $this->user, $this->password, $option);
+                $pdo = new PDO($dsn, $this->user, $this->password, $option);
             } catch (PDOException) {
-                throw new LoggedException('Bad Gateway', 502);
+                error_log('Retrying database connection (' . $retry . ')');
             }
             $retry = 0;
         }
+        if(!isset($pdo)) {
+            exit('[ERROR]: Could not connect to database. ' . $e);
+        }
+
     }
 
-    public function getConnection()
+    public static function getInstance()
     {
-        return $this->pdo_connection;
+        if (!isset(self::$instance)) {
+          self::$instance = new static();
+        }
+        return self::$instance;
     }
-
-    
 }
