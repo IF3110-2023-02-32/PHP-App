@@ -1,6 +1,6 @@
 <?php
 
-abstract class CheckAdmin {
+abstract class BaseMiddleware {
   private static $instance;
 
   private function __construct() {}
