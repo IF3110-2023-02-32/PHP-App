@@ -42,4 +42,9 @@ class Database
         }
         return self::$instance;
     }
+
+    public function getPDO()
+    {
+        return $this->pdo;
+    }
 }
