@@ -1,8 +1,8 @@
 <?php
 
 define('APP_ROOT_PATH', __DIR__);
-define('CONTROLLER_PATH', __DIR__ . 'app/controllers');
-define('MIDDLEWARE_PATH', __DIR__ . 'app/middlewares');
+define('CONTROLLER_PATH', __DIR__ . '/app/controllers');
+define('MIDDLEWARE_PATH', __DIR__ . '/app/middlewares');
 
 
 require_once "app/config/config.php";
