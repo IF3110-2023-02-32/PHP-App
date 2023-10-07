@@ -22,12 +22,21 @@ class RegisterModel
         try{
             $hashpass = password_hash($password, PASSWORD_DEFAULT);
             $db = Database::getInstance()->getPDO();
-            $sql = "INSERT INTO users (username, password_hashed, profile_name, role) VALUES ('$username', '$hashpass', '$nama', 'user')";
-            $result = $db->query($sql);
-            if ($result) {
-                return true;
-            } else {
+            $check = "SELECT * FROM users WHERE username = '$username'";
+            $hasilcek = $db->query($check);
+            $row = $hasilcek->fetchAll(PDO::FETCH_ASSOC);
+            if($row){
                 return false;
+            }
+            else{
+
+                $sql = "INSERT INTO users (username, password_hashed, profile_name, role) VALUES ('$username', '$hashpass', '$nama', 'user')";
+                $result = $db->query($sql);
+                if ($result) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }catch(Exception $e){
             return false;

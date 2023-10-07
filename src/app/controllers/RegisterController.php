@@ -1,6 +1,6 @@
 <?php
 
-require_once APP_ROOT_PATH . "/app/controllers/BaseController.php";
+require_once APP_ROOT_PATH . "/app/baseclasses/BaseController.php";
 require_once APP_ROOT_PATH . "/app/models/RegisterModel.php";
 
 class RegisterController extends BaseController{
@@ -25,6 +25,7 @@ class RegisterController extends BaseController{
                 'status' => 'sukses',
                 'message' => 'Registrasi berhasil'
             );
+            header('Content-Type: application/json');
             return json_encode($hasiljson);
         }
         else{
@@ -32,6 +33,7 @@ class RegisterController extends BaseController{
                 'status' => 'error',
                 'message' => 'Registrasi gagal'
             );
+            header('Content-Type: application/json');
             return json_encode($hasiljson);
             
         }

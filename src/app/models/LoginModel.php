@@ -16,35 +16,30 @@ class LoginModel
         return self::$instance;
     }
 
-    public function isAdmin(){
-        return $_SESSION['role'] == 'admin';
-    }
 
-    public function isUser(){
-        return $_SESSION['role'] == 'user';
-    }
-
-    public function isLogin(){
-        return isset($_SESSION['id']);
-    }
 
     public static function login($username, $password)
     {
-        $db = Database::getInstance()->getPDO();
-        $sql = "SELECT * FROM users WHERE username = '$username'";
-        $result = $db->query($sql);
-        if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            if(password_verify($password, $row['password_hashed'])){
-                $_SESSION['id'] = $row['id'];
-                $_SESSION['role'] = $row['role'];
-                return $row['id'];
-            }
-            else{
+        try{
+            $db = Database::getInstance()->getPDO();
+            $sql = "SELECT * FROM users WHERE username = '$username'";
+            $result = $db->query($sql);
+            $row = $result->fetchAll(PDO::FETCH_ASSOC);
+            if ($row) {
+                if(password_verify($password, $row[0]['password_hashed'])){
+                    // $_SESSION['id'] = $row['id'];
+                    // $_SESSION['role'] = $row['role'];
+                    return true;
+                }
+                else{
+                    return null;
+                }
+        
+                
+            } else {
                 return null;
             }
-            
-        } else {
+        }catch(Exception $e){
             return null;
         }
     }

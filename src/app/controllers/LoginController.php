@@ -19,11 +19,12 @@ class LoginController extends BaseController{
         $password = $_POST['password'];
 
         $user_id = $this->srv->login($username, $password);
-        if($user_id!=null){
+        if($user_id==true){
             $hasiljson = array(
                 'status' => 'sukses',
                 'user_id' => $user_id
             );
+            header('Content-Type: application/json');
             return json_encode($hasiljson);
         }
         else{
@@ -31,6 +32,7 @@ class LoginController extends BaseController{
                 'status' => 'gagal',
                 'message' => 'Username atau password salah'
             );
+            header('Content-Type: application/json');
             return json_encode($hasiljson);
             
         }

@@ -18,7 +18,7 @@ class AdminModel
     public function banUser($user_id){
         try{
             $db = Database::getInstance()->getPDO();
-            $sql = "UPDATE users SET status = 'banned' WHERE id = '$user_id'";
+            $sql = "UPDATE users SET status = 'ban' WHERE id = '$user_id'";
             $result = $db->query($sql);
             if($result){
                 return true;
@@ -33,9 +33,8 @@ class AdminModel
 
     public function unbanUser($user_id){
         try{
-            $konek = new Database();
-            $db = $konek->pdo;
-            $sql = "UPDATE users SET status = 'active' WHERE id = '$user_id'";
+            $db = Database::getInstance()->getPDO();
+            $sql = "UPDATE users SET status = null WHERE id = '$user_id'";
             $result = $db->query($sql);
             if($result){
                 return true;
