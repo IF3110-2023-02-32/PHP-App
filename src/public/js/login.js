@@ -19,7 +19,7 @@ document.getElementById('tmblbuatlogin').addEventListener('click', function() {
         alert("Username atau password tidak boleh kosong");
     }
     else{
-        const url = '/checkloginreg.php/login';
+        const url = 'localhost:8008/api/login';
         var xhr = new XMLHttpRequest();
         var data = JSON.stringify({ username: usernameambil, password: passwordambil });
 
@@ -60,7 +60,7 @@ document.getElementById('tmblreg').addEventListener('click', function() {
         alert("Username atau password minimal 5 karakter");
     }
     else{
-        const url = '/checkloginreg.php/register';
+        const url = 'localhost:8008/api/register';
         var xhr = new XMLHttpRequest();
         var data = JSON.stringify({ username: userreg, password: passreg, nama: namareg });
 
