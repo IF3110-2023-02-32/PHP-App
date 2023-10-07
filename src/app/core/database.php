@@ -6,6 +6,10 @@ class Database
 
     private $pdo;
 
+    private $user = DBUSER;
+    private $password = DBPASSWORD;
+
+
     public function __construct()
     {
         $dsn = "pgsql:host=" . DBHOST .
@@ -20,7 +24,7 @@ class Database
         ];
 
         $retry = CONNECT_RETRIES;
-        while(retry){
+        while($retry){
             try {
                 $retry--;
                 $pdo = new PDO($dsn, $this->user, $this->password, $option);
@@ -30,7 +34,7 @@ class Database
             $retry = 0;
         }
         if(!isset($pdo)) {
-            exit('[ERROR]: Could not connect to database. ' . $e);
+            exit('[ERROR]: Could not connect to database. ');
         }
 
     }

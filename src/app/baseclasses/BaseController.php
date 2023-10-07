@@ -1,7 +1,7 @@
 <?php
 
-require_once PROJECT_ROOT_PATH . "/app/exceptions/BadRequestException.php";
-require_once PROJECT_ROOT_PATH . "/app/exceptions/MethodNotAllowedException.php";
+require_once APP_ROOT_PATH . "/app/exceptions/BadRequestException.php";
+require_once APP_ROOT_PATH . "/app/exceptions/MethodNotAllowedException.php";
 
 abstract class BaseController {
   protected static $instance;
