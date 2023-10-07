@@ -1,15 +1,18 @@
 <?php
 
 define('APP_ROOT_PATH', __DIR__);
+define('CONTROLLER_PATH', __DIR__ . 'app/controllers');
+define('MIDDLEWARE_PATH', __DIR__ . 'app/middlewares');
+
 
 require_once "app/config/config.php";
 require_once APP_ROOT_PATH . "/app/router/Router.php";
-require_once APP_ROOT_PATH . "/app/controllers/LoginController.php";
-require_once APP_ROOT_PATH . "/app/controllers/PageLogin.php";
-require_once APP_ROOT_PATH . "/app/controllers/RegisterController.php";
-require_once APP_ROOT_PATH . "/app/controllers/AdminController.php";
-require_once APP_ROOT_PATH . "/app/controllers/BanController.php";
-require_once APP_ROOT_PATH . "/app/controllers/UnbanController.php";
+require_once CONTROLLER_PATH . "/User/LoginController.php";
+require_once CONTROLLER_PATH . "/User/PageLogin.php";
+require_once CONTROLLER_PATH . "/User/RegisterController.php";
+require_once CONTROLLER_PATH . "/Admin/AdminController.php";
+require_once CONTROLLER_PATH . "/Admin/BanController.php";
+require_once CONTROLLER_PATH . "/Admin/UnbanController.php";
 $router = new Router();
 
 // $router->addHandler("/example", BaseController::getInstance(), [BaseMiddleware::getInstance()]);
