@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="if-3110-2023-01-32/src/public/css/login.css">
+    <link rel="stylesheet" type='text/css' href="../css/login.css">
 </head>
 <body>
     
