@@ -29,7 +29,7 @@ class LoginModel
                 if(password_verify($password, $row[0]['password_hashed'])){
                     // $_SESSION['id'] = $row['id'];
                     // $_SESSION['role'] = $row['role'];
-                    return true;
+                    return $row[0]['role'];
                 }
                 else{
                     return null;

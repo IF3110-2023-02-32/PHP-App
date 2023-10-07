@@ -18,11 +18,11 @@ class LoginController extends BaseController{
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $user_id = $this->srv->login($username, $password);
-        if($user_id==true){
+        $role = $this->srv->login($username, $password);
+        if($role!=null){
             $hasiljson = array(
                 'status' => 'sukses',
-                'user_id' => $user_id
+                'user_id' => $role
             );
             header('Content-Type: application/json');
             return json_encode($hasiljson);
