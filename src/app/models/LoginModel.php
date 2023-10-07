@@ -1,26 +1,12 @@
 <?php
 
-require_once APP_ROOT_PATH . '/app/baseclasses/BaseModel.php';
-require_once APP_ROOT_PATH . '/app/baseclasses/Database.php';
+require_once APP_ROOT_PATH . "/app/baseclasses/BaseModel.php";
+require_once APP_ROOT_PATH . "/app/core/database.php";
 
 class LoginModel extends BaseModel
 {
     protected static $instance;
-    public $user_id;
-    public $username;
-    public $password;
-    public $email;
-    public $created_at;
-    public $updated_at;
-    public $deleted_at;
-    public $role;
-    public $status;
 
-    private function __construct()
-    {
-        $this->_attributes = ['user_id', 'username', 'password', 'email', 'created_at', 'updated_at', 'deleted_at', 'role', 'status'];
-        $this->_primary_key = ['user_id'];
-    }
 
     public static function getInstance()
     {
@@ -44,8 +30,7 @@ class LoginModel extends BaseModel
 
     public static function login($username, $password)
     {
-        $konek = new Database();
-        $db = $konek->pdo;
+        $db = Database::getInstance()->getPDO();
         $sql = "SELECT * FROM users WHERE username = '$username'";
         $result = $db->query($sql);
         if ($result->num_rows > 0) {
