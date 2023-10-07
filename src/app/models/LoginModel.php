@@ -3,7 +3,7 @@
 require_once APP_ROOT_PATH . "/app/baseclasses/BaseModel.php";
 require_once APP_ROOT_PATH . "/app/core/database.php";
 
-class LoginModel extends BaseModel
+class LoginModel 
 {
     protected static $instance;
 

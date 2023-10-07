@@ -1,5 +1,7 @@
 <?php
 
+require_once APP_ROOT_PATH . "/app/config/config.php";
+
 class Database
 {
     private static $instance;
@@ -51,4 +53,16 @@ class Database
     {
         return $this->pdo;
     }
+}
+
+
+$test = Database::getInstance()->getPDO();
+$query = "SELECT * FROM users";
+$result = $test->query($query);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        echo $row['username'] . "<br>";
+    }
+} else {
+    echo "0 results";
 }

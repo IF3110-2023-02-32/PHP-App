@@ -2,7 +2,7 @@
 
 require_once APP_ROOT_PATH . '/app/baseclasses/BaseModel.php';
 
-class PostModel extends BaseModel
+class PostModel
 {
     public $post_id;
     public $owner_id;

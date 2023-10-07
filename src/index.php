@@ -4,7 +4,6 @@ define('APP_ROOT_PATH', __DIR__);
 
 require_once "app/config/config.php";
 require_once APP_ROOT_PATH . "/app/router/Router.php";
-require_once APP_ROOT_PATH . "/routes.php";
 require_once APP_ROOT_PATH . "/app/controllers/LoginController.php";
 require_once APP_ROOT_PATH . "/app/controllers/PageLogin.php";
 

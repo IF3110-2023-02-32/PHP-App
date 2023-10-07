@@ -16,37 +16,16 @@ class Router {
       $this->routing($pathWithoutQuery, $method);
     } catch (BadRequestException $e) {
       header("HTTP/1.0 400 Bad Request");
-      echo (new BaseResponse(
-        false,
-        null,
-        $e->getMessage(),
-        400
-      ))->toJSON();
+  
     } catch (MethodNotAllowedException $e) {
       header("HTTP/1.0 405 Method Not Allowed");
-      echo (new BaseResponse(
-        false,
-        null,
-        $e->getMessage(),
-        405
-      ))->toJSON();
+      
     } catch (Exception $e) {
       header("HTTP/1.0 500 Internal Server Error");
-      echo (new BaseResponse(
-        false,
-        null,
-        $e->getMessage(),
-        500
-      ))->toJSON();
+      
     } catch (Exception $e) {
       Logger::error($e->getMessage());
       header("HTTP/1.0 500 Internal Server Error");
-      echo (new BaseResponse(
-        false,
-        null,
-        "INTERNAL SERVER ERROR",
-        500
-      ))->toJSON();
     }
   }
 

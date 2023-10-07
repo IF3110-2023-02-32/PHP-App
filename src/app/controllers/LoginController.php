@@ -1,6 +1,6 @@
 <?php
 
-require_once APP_ROOT_PATH . "/app/controllers/BaseController.php";
+require_once APP_ROOT_PATH . "/app/baseclasses/BaseController.php";
 require_once APP_ROOT_PATH . "/app/models/LoginModel.php";
 
 class LoginController extends BaseController{
