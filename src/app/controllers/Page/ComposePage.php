@@ -1,6 +1,6 @@
 <?php
 
-require_once APP_ROOT_PATH . "/app/baseclasses/BaseController.php";
+require_once SRC_ROOT_PATH . "/app/baseclasses/BaseController.php";
 class ComposePage extends BaseController{
     protected static $instance;
 
@@ -17,7 +17,7 @@ class ComposePage extends BaseController{
 
     public function get($urlParams)
     {
-        require APP_ROOT_PATH . "/public/view/post.php";
+        require SRC_ROOT_PATH . "/public/view/post.php";
         exit();
     }
 }

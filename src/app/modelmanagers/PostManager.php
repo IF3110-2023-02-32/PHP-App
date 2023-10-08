@@ -1,6 +1,6 @@
 <?php
 
-require_once APP_ROOT_PATH . "/baseclasses/BaseManager.php";
+require_once SRC_ROOT_PATH . "/baseclasses/BaseManager.php";
 
 class PostManager extends BaseManager
 {

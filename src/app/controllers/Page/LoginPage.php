@@ -1,5 +1,5 @@
 <?php
-require_once APP_ROOT_PATH . "/app/baseclasses/BaseController.php";
+require_once SRC_ROOT_PATH . "/app/baseclasses/BaseController.php";
 class LoginPage extends BaseController{
     protected static $instance;
 
@@ -13,7 +13,7 @@ class LoginPage extends BaseController{
         return self::$instance;
     }
     public function get($urlParams){
-        require APP_ROOT_PATH . "/public/view/login.php";
+        require SRC_ROOT_PATH . "/app/view/login.php";
         exit();
     }
 }

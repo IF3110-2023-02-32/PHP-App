@@ -1,7 +1,7 @@
 <?php
 
-require_once APP_ROOT_PATH . "/app/exceptions/BadRequestException.php";
-require_once APP_ROOT_PATH . "/app/exceptions/MethodNotAllowedException.php";
+require_once SRC_ROOT_PATH . "/app/exceptions/BadRequestException.php";
+require_once SRC_ROOT_PATH . "/app/exceptions/MethodNotAllowedException.php";
 
 class Router {
   private $pathAndHandler;

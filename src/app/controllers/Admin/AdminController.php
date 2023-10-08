@@ -1,8 +1,8 @@
 <?php
 
 
-require_once APP_ROOT_PATH . "/app/baseclasses/BaseController.php";
-require_once APP_ROOT_PATH . "/app/models/UserModel.php";
+require_once SRC_ROOT_PATH . "/app/baseclasses/BaseController.php";
+require_once SRC_ROOT_PATH . "/app/models/UserModel.php";
 
 class AdminController extends BaseController{
     protected static $instance;

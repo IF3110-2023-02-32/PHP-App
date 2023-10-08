@@ -1,7 +1,7 @@
 <?php
 
-require_once APP_ROOT_PATH . "/app/baseclasses/BaseModel.php";
-require_once APP_ROOT_PATH . "/app/core/database.php";
+require_once SRC_ROOT_PATH . "/app/baseclasses/BaseModel.php";
+require_once SRC_ROOT_PATH . "/app/core/database.php";
 
 class UserModel
 {

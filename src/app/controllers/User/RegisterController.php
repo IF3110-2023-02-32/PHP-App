@@ -1,7 +1,7 @@
 <?php
 
-require_once APP_ROOT_PATH . "/app/baseclasses/BaseController.php";
-require_once APP_ROOT_PATH . "/app/models/RegisterModel.php";
+require_once SRC_ROOT_PATH . "/app/baseclasses/BaseController.php";
+require_once SRC_ROOT_PATH . "/app/models/RegisterModel.php";
 
 class RegisterController extends BaseController{
     protected static $instance;

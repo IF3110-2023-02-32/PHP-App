@@ -1,7 +1,7 @@
 <?php
 
-require_once APP_ROOT_PATH . "/app/baseclasses/BaseController.php";
-require_once APP_ROOT_PATH . "/app/models/AdminModel.php";
+require_once SRC_ROOT_PATH . "/app/baseclasses/BaseController.php";
+require_once SRC_ROOT_PATH . "/app/models/AdminModel.php";
 class UnbanController extends BaseController{
     protected static $instance;
     public static function getInstance(){

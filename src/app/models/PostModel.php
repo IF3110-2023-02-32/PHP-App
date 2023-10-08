@@ -1,6 +1,6 @@
 <?php
 
-require_once APP_ROOT_PATH . '/app/baseclasses/BaseModel.php';
+require_once SRC_ROOT_PATH . '/app/baseclasses/BaseModel.php';
 
 class PostModel extends BaseModel
 {
