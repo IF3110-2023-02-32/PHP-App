@@ -31,7 +31,7 @@ class RegisterController extends BaseController{
         else{
             $hasiljson = array(
                 'status' => 'error',
-                'message' => 'Registrasi gagal'
+                'message' => 'Registrasi gagal, username sudah digunakan'
             );
             header('Content-Type: application/json');
             return json_encode($hasiljson);

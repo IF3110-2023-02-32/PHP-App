@@ -1,5 +1,7 @@
 <?php
 
+
+
 require_once APP_ROOT_PATH . "/app/baseclasses/BaseController.php";
 require_once APP_ROOT_PATH . "/app/models/LoginModel.php";
 
@@ -22,14 +24,14 @@ class LoginController extends BaseController{
         if($role!=null){
             $hasiljson = array(
                 'status' => 'sukses',
-                'user_id' => $role
+                'role' => $role
             );
             header('Content-Type: application/json');
             return json_encode($hasiljson);
         }
         else{
             $hasiljson = array(
-                'status' => 'gagal',
+                'status' => 'error',
                 'message' => 'Username atau password salah'
             );
             header('Content-Type: application/json');

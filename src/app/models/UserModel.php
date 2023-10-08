@@ -53,7 +53,7 @@ class UserModel
     public function getAllUserUnban(){
         try{
             $db = Database::getInstance()->getPDO();
-            $sql = "SELECT * FROM users WHERE status IS NULL";
+            $sql = "SELECT * FROM users WHERE status IS NULL and role = 'user'";
             $result = $db->query($sql);
             $hasil = $result->fetchAll(PDO::FETCH_ASSOC);
             return $hasil;
