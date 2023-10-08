@@ -42,17 +42,12 @@ CREATE TABLE "posts" (
   "refer_type" varchar DEFAULT null,
   "refer_post" integer DEFAULT null,
   "refer_post_owner" integer DEFAULT null,
+  "tags" varchar[] DEFAULT '{}',
   PRIMARY KEY ("post_id", "owner_id"),
 
   CONSTRAINT no_self_refer CHECK (refer_post <> post_id AND refer_post_owner <> owner_id)
 );
 -- CURRENT IMPLEMENTATION ONLY ACCEPTS "refer_type" values of {'Repost', 'Reply'}
-
-CREATE TABLE "tags" (
-  "post_id" integer,
-  "owner_id" integer,
-  "tag" varchar
-);
 
 CREATE TABLE "images" (
   "post_id" integer,
@@ -108,8 +103,6 @@ ALTER TABLE "posts" ADD FOREIGN KEY ("owner_id") REFERENCES "users" ("id");
 
 ALTER TABLE "posts" ADD FOREIGN KEY ("refer_post", "refer_post_owner") REFERENCES "posts" ("post_id", "owner_id");
 
-ALTER TABLE "tags" ADD FOREIGN KEY ("post_id", "owner_id") REFERENCES "posts" ("post_id", "owner_id");
-
 ALTER TABLE "images" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
 
 ALTER TABLE "videos" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
@@ -119,8 +112,6 @@ ALTER TABLE "audios" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "po
 ALTER TABLE "likes" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
 
 CREATE INDEX user_post ON posts USING HASH(owner_id);
-
-CREATE INDEX tags_index ON tags USING HASH(tag);
 
 CREATE FUNCTION add_user_detail() RETURNS TRIGGER AS $$
   BEGIN
