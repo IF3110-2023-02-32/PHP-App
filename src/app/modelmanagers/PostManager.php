@@ -20,22 +20,31 @@ class PostManager extends BaseManager
     return self::$instance;
   }
 
-  public function getByUser($user_id)
-  {
-    $where = ['owner_id' => ['=', $user_id, PDO::PARAM_INT]];
-    return $this->findAll(where:$where);
-  }
-
-  public function getByTags($tags = []) {
+  public static function getTagsSelection($tags = []) {
     $arrTags = BaseManager::arrToSQLArr($tags);
     $where = ['tags' => ["@>", $arrTags, PDO::PARAM_STR]];
+    
+    return $where;
+  }
+
+  public static function getUserSelection($user_id) {
+    $where = ['owner_id' => ['=', $user_id, PDO::PARAM_INT]];
+
+    return $where;
+  }
+
+  public function getByUser($user_id)
+  {
+    $where = PostManager::getUserSelection($user_id);
+    return $this->findAll(where:$where);
   }
 
   public function getReplies($post_id, $owner_id)
   {
     $where = [
       'refer_type' => ['=', 'Reply', PDO::PARAM_STR],
-      'refer_post_id' => ['=', $post_id, PDO::PARAM_INT]
+      'refer_post_id' => ['=', $post_id, PDO::PARAM_INT],
+      'refer_post_owner' => ['=', $owner_id, PDO::PARAM_INT]
     ];
   }
 }
