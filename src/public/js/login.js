@@ -19,28 +19,38 @@ document.getElementById('tmblbuatlogin').addEventListener('click', function() {
         alert("Username atau password tidak boleh kosong");
     }
     else{
-        const url = 'localhost:8008/api/login';
-        var xhr = new XMLHttpRequest();
-        var data = JSON.stringify({ username: usernameambil, password: passwordambil });
-
+        const xhr = new XMLHttpRequest();
+        const url = 'http://localhost:8008/api/login';
+        const username = usernameambil;
+        const password = passwordambil;
+        
         xhr.open('POST', url, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var responseData = JSON.parse(xhr.responseText);
-                if(responseData.role==="admin"){
-                    window.location.href = "admin.html";
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+              const response = JSON.parse(xhr.responseText);
+                if(response.status==="error"){
+                    alert(response.message);
                 }
-                else if(responseData.role==="user"){
-                    window.location.href = "user.html";
+                else if(response.status==="sukses"){
+                    if(response.role==="admin"){
+                        window.location.href = "admin.html";//nanti diganti
+                    }
+                    else if(response.role==="user"){
+                        window.location.href = "user.html";//nanti diganti
+                    }
                 }
-                else if(responseData.status==="error"){
-                    alert("Username atau password salah");
-                }
+            } else {
+              console.error('Gagal melakukan permintaan');
             }
+          }
         };
-        xhr.send(data);
+        
+        const formData = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`;
+        xhr.send(formData);
+        
     }
     
 });
@@ -49,37 +59,44 @@ document.getElementById('tmblreg').addEventListener('click', function() {
     var passreg = document.getElementById('passreg').value;
     var namareg = document.getElementById('namareg').value;
     var regex = /^\S+$/;
-
-    if(regex.test(userreg)===false || regex.test(passreg)===false){
-        alert("Username atau password tidak boleh mengandung spasi");
-    }
-    else if(userreg==="" || passreg==="" || namareg===""){
+    if(userreg==="" || passreg==="" || namareg===""){
         alert("Username, password, atau nama tidak boleh kosong");
+    }
+    else  if(regex.test(userreg)===false || regex.test(passreg)===false){
+        alert("Username atau password tidak boleh mengandung spasi");
     }
     else if(userreg.length<5 || passreg.length<5){
         alert("Username atau password minimal 5 karakter");
     }
     else{
-        const url = 'localhost:8008/api/register';
-        var xhr = new XMLHttpRequest();
-        var data = JSON.stringify({ username: userreg, password: passreg, nama: namareg });
-
+        const xhr = new XMLHttpRequest();
+        const url = 'http://localhost:8008/api/register';
+        const username = userreg;
+        const password = passreg;
+        const nama = namareg;
+        
         xhr.open('POST', url, true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        
         xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var responseData = JSON.parse(xhr.responseText);
-                if(responseData.status==="error"){
-                    alert(responseData.message);
+          if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const response = JSON.parse(xhr.responseText);
+                if(response.status==="error"){
+                    alert(response.message);
                 }
-                else if(responseData.status==="sukses"){
-                    alert("Data berhasil ditambahkan");
-                    window.location.href = "login.html";
+                else if(response.status==="sukses"){
+                    alert(response.message);
+                    tepi.classList.remove('ganti');
                 }
+            } else {
+                console.error('Gagal melakukan permintaan');
             }
+          }
         };
-        xhr.send(data);
+        
+        const formData = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&nama=${encodeURIComponent(nama)}`;
+        xhr.send(formData);
     }   
 });
 
