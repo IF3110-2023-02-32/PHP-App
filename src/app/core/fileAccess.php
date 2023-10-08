@@ -4,14 +4,14 @@ class FileAccess
 {
     private $fileDir;
 
-    public const PROFILES_PATH = 'profiles/';
-    public const BANNERS_PATH = 'banners/';
-    public const POSTS_PATH = 'posts/';
+    public const PROFILES_PATH = '/profiles';
+    public const BANNERS_PATH = '/banners';
+    public const POSTS_PATH = '/posts';
 
     public const FILE_TYPE_PATH = [
-        VIDEO_TYPE => 'videos/',
-        AUDIO_TYPE => 'audios/',
-        IMAGE_TYPE => 'images/'
+        VIDEO_TYPE => '/videos/',
+        AUDIO_TYPE => '/audios/',
+        IMAGE_TYPE => '/images/'
     ];
 
     /**
@@ -20,7 +20,7 @@ class FileAccess
      */
     public function __construct(string $dir)
     {
-        $this->fileDir = __DIR__ . '/../../storage/' . $dir;
+        $this->fileDir = SRC_ROOT_PATH . '/storage' . $dir;
     }
 
     /**
