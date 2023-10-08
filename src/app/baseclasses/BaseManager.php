@@ -21,6 +21,11 @@ abstract class BaseManager
     return self::$instance;
   }
 
+  public static function arrToSQLArr($array)
+  {
+    return "{" . implode(",", $array) . "}";
+  }
+
   public function getPDO()
   {
     return $this->pdo;

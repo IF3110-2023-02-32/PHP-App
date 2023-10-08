@@ -27,7 +27,8 @@ class PostManager extends BaseManager
   }
 
   public function getByTags($tags = []) {
-    $where = ['tags' => ["@>", $tags, PDO::PARAM_STR]];
+    $arrTags = BaseManager::arrToSQLArr($tags);
+    $where = ['tags' => ["@>", $arrTags, PDO::PARAM_STR]];
   }
 
   public function getReplies($post_id, $owner_id)
