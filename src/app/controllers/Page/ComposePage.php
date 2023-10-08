@@ -17,7 +17,7 @@ class ComposePage extends BaseController{
 
     public function get($urlParams)
     {
-        require SRC_ROOT_PATH . "/app/view/post.php";
+        require PAGE_PATH . "/post.php";
         exit();
     }
 }

@@ -1,20 +1,26 @@
 <?php
+
 require_once SRC_ROOT_PATH . "/app/baseclasses/BaseController.php";
-class LoginPage extends BaseController{
+class SettingsPage extends BaseController{
     protected static $instance;
 
     public function __construct(){
         parent::__construct(null);
     }
+
     public static function getInstance(){
         if(!isset(self::$instance)){
             self::$instance = new static();
         }
         return self::$instance;
     }
-    public function get($urlParams){
-        require PAGE_PATH . "/login.php";
-        exit();
+
+    public function get($urlParams)
+    {
+        if($urlParams[0] = 'profile'){
+            require PAGE_PATH . "/profile_setting.php";
+            exit();
+        }
     }
 }
 
