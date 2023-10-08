@@ -1,7 +1,7 @@
 <?php
 
 require_once SRC_ROOT_PATH . "/app/baseclasses/BaseController.php";
-class SettingsPage extends BaseController{
+class AdminPage extends BaseController{
     protected static $instance;
 
     public function __construct(){
