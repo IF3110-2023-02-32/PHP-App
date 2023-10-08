@@ -2,7 +2,6 @@
 
 abstract class BaseModel {
   public $_primary_key = '';
-  protected $_attributes;
 
   public function __construct() {
     return $this;
@@ -19,7 +18,7 @@ abstract class BaseModel {
   
   public function constructFromArray($array)
   {
-    foreach ($this->_attributes as $attribute) {
+    foreach (array_keys($array) as $attribute) {
       $this->$attribute = $array[$attribute];
     }
 
