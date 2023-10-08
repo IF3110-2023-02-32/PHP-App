@@ -17,14 +17,8 @@ class SettingsPage extends BaseController{
 
     public function get($urlParams)
     {
-        if($urlParams[0] = 'profile') {
-            require PAGE_PATH . "/profile_setting.php";
-            exit();
-        }
-        if($urlParams[0] = '') {
-            require PAGE_PATH . "/settings.php";
-            exit();
-        }
+        require PAGE_PATH . "/admin.php";
+        exit();
     }
 }
 
