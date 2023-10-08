@@ -17,6 +17,7 @@ require_once CONTROLLER_PATH . "/Admin/UnbanController.php";
 require_once CONTROLLER_PATH . "/Page/LoginPage.php";
 require_once CONTROLLER_PATH . "/Page/ComposePage.php";
 require_once CONTROLLER_PATH . "/Page/SettingsPage.php";
+require_once CONTROLLER_PATH . "/Page/AdminPage.php";
 require_once CONTROLLER_PATH . "/Page/UserPage.php";
 
 $router = new Router();
