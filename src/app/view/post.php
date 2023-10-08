@@ -4,14 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/post.css">
+    <link rel="stylesheet" type="text/css" href="/public/css/post.css">
     <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
     <title>Post Page</title>
 </head>
 
 <body>
     <section id="overlay">
-        <img src="github_post_logo.jpg" alt="Github Logo" id="logo">
+        <img src="/public/assets/github_post_logo.jpg" alt="Github Logo" id="logo">
         <hr>
         <form action="submission.php" method="POST">
             <h1>Create a post!</h1>
