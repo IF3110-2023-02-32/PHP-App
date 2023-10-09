@@ -11,9 +11,9 @@
 
 <body>
     <section id="overlay">
-        <img src="/public/assets/github_post_logo.jpg" alt="Github Logo" id="logo">
+        <img src="/public/assets/Logo.png" alt="Kicau Logo" id="logo">
         <hr>
-        <form action="submission.php" method="POST">
+        <form action="create" method="POST">
             <h1>Create a post!</h1>
             <section class="text-input">
                 <label for="textarea-input">Type in the box below:</label>
@@ -22,21 +22,11 @@
             </section>
             <br>
 
-            <section class="image">
-                <label for="image-input">Select an image file:</label>
-                <input type="file" id="image-input" name="image-input">
+            <section class="file">
+                <label for="file-input">Select a file:</label>
+                <input type="file" id="file-input" name="image-input">
             </section>
             <hr>
-            <section class="video">
-                <label for="video-input">Select a video file:</label>
-                <input type="file" id="video-input" name="video-input">
-            </section>
-            <hr>
-            <section class="audio">
-                <label for="audio-input">Select an audio file:</label>
-                <input type="file" id="audio-input" name="audio-input">
-            </section>
-            <br>
 
             <section class="submission">
                 <input type="submit" value="Post">
