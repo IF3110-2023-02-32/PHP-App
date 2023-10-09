@@ -36,10 +36,10 @@ document.getElementById('tmblbuatlogin').addEventListener('click', function() {
                 }
                 else if(response.status==="sukses"){
                     if(response.role==="admin"){
-                        window.location.href = "admin.html";//nanti diganti
+                        window.location.href = "/admin";//nanti diganti
                     }
                     else if(response.role==="user"){
-                        window.location.href = "user.html";//nanti diganti
+                        window.location.href = "/user";//nanti diganti
                     }
                 }
             } else {
