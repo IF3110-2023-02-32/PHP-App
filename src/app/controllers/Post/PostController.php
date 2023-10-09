@@ -61,7 +61,7 @@ class PostController extends BaseController
     $postObj = $postObj->constructFromArray($postArr);
 
     $attributes = array_intersect_key(PostModel::$PDOATTR, $postArr);
-    $post_id = $srv->insert($postObj, $attributes, 'post_id');
+    $post_id = $this->srv->insert($postObj, $attributes, 'post_id');
 
     return $post_id;
   }
