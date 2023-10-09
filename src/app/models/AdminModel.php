@@ -47,6 +47,22 @@ class AdminModel
         }
     }
 
+    public function setAdmin($user_id){
+        try{
+            $db = Database::getInstance()->getPDO();
+            $sql = "UPDATE users SET role = 'admin' WHERE id = '$user_id'";
+            $result = $db->query($sql);
+            if($result){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
 }
 
 ?>
