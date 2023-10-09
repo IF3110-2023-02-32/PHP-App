@@ -23,6 +23,12 @@ Aplikasi web ini merupakan aplikasi web yang digunakan untuk memudahkan pengguna
 
 ### Screenshot Tampilan Aplikasi
 
+![Alt text](image.png)
+
+![Alt text](image-1.png)
+
+![Alt text](image-2.png)
+
 
 ### Pembagian Tugas
 
