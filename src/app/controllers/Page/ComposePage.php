@@ -21,7 +21,7 @@ class ComposePage extends BaseController{
 
     public function post($urlParams)
     {
-        $srv->post();
+        $srv->compose();
         require PAGE_PATH . "/submission.php";
         exit();
     }

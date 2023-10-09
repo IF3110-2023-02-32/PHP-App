@@ -1,7 +1,7 @@
 <?php
 
 require_once SRC_ROOT_PATH . "/app/baseclasses/BaseModel.php";
-require_once SRC_ROOT_PATH . "/app/core/database.php";
+require_once SRC_ROOT_PATH . "/app/core/PDOHandler.php";
 
 class RegisterModel
 {
@@ -21,7 +21,7 @@ class RegisterModel
     {
         try{
             $hashpass = password_hash($password, PASSWORD_DEFAULT);
-            $db = Database::getInstance()->getPDO();
+            $db = PDOHandler::getInstance()->getPDO();
             $check = "SELECT * FROM users WHERE username = '$username'";
             $hasilcek = $db->query($check);
             $row = $hasilcek->fetchAll(PDO::FETCH_ASSOC);

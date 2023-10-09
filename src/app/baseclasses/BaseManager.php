@@ -1,6 +1,6 @@
 <?php
 
-require_once PROJECT_ROOT_PATH . "/app/core/Database.php";
+require_once SRC_ROOT_PATH . "/app/core/PDOHandler.php";
 
 abstract class BaseManager
 {
@@ -10,7 +10,7 @@ abstract class BaseManager
 
   protected function __construct()
   {
-    $this->pdo = Database::getInstance()->getPDO();
+    $this->pdo = PDOHandler::getInstance()->getPDO();
   }
 
   public static function getInstance()

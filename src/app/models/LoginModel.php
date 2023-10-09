@@ -1,7 +1,7 @@
 <?php
 
 require_once SRC_ROOT_PATH . "/app/baseclasses/BaseModel.php";
-require_once SRC_ROOT_PATH . "/app/core/database.php";
+require_once SRC_ROOT_PATH . "/app/core/PDOHandler.php";
 
 class LoginModel 
 {
@@ -21,7 +21,7 @@ class LoginModel
     public static function login($username, $password)
     {
         try{
-            $db = Database::getInstance()->getPDO();
+            $db = PDOHandler::getInstance()->getPDO();
             $sql = "SELECT * FROM users WHERE username = '$username'";
             $result = $db->query($sql);
             $row = $result->fetchAll(PDO::FETCH_ASSOC);
