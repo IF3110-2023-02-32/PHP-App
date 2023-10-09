@@ -13,6 +13,7 @@ require_once CONTROLLER_PATH . "/User/RegisterController.php";
 require_once CONTROLLER_PATH . "/Admin/AdminController.php";
 require_once CONTROLLER_PATH . "/Admin/BanController.php";
 require_once CONTROLLER_PATH . "/Admin/UnbanController.php";
+require_once CONTROLLER_PATH . "/Admin/SetAdmin.php";
 
 require_once CONTROLLER_PATH . "/Page/LoginPage.php";
 require_once CONTROLLER_PATH . "/Page/ComposePage.php";
@@ -28,6 +29,7 @@ $router->addHandler("/api/register", RegisterController::getInstance(), []);
 $router->addHandler("/api/admin", AdminController::getInstance(), []);
 $router->addHandler("/api/ban", BanController::getInstance(), []);
 $router->addHandler("/api/unban", UnbanController::getInstance(), []);
+$router->addHandler("/api/setadmin", SetAdminController::getInstance(), []);
 
 $router->addHandler("/login", LoginPage::getInstance(), []);
 $router->addHandler("/compose/kicau", ComposePage::getInstance(), []);
