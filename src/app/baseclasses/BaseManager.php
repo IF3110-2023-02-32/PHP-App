@@ -142,7 +142,7 @@ abstract class BaseManager
     return $stmt->fetch();
   }
 
-  public function insert($model, $attributes, $idName = null) // attributes[$attribute] = $type
+  public function insert($model, $attributes, $retIDName = null) // attributes[$attribute] = $type
   {
     $sql = "INSERT INTO $this->tableName (";
 
@@ -164,7 +164,7 @@ abstract class BaseManager
     }
 
     $stmt->execute();
-    return $this->pdo->lastInsertId($idName);
+    return $this->pdo->lastInsertId($retIDName);
   }
 
   public function update($model, $attributes) // attributes[$attribute] = $type
