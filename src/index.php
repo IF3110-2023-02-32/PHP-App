@@ -20,6 +20,8 @@ require_once CONTROLLER_PATH . "/Page/ComposePage.php";
 require_once CONTROLLER_PATH . "/Page/SettingsPage.php";
 require_once CONTROLLER_PATH . "/Page/AdminPage.php";
 require_once CONTROLLER_PATH . "/Page/UserPage.php";
+require_once CONTROLLER_PATH . "/Page/HomePage.php";
+require_once CONTROLLER_PATH . "/Page/PostPage.php";
 
 $router = new Router();
 
@@ -37,5 +39,7 @@ $router->addHandler("/*", UserPage::getInstance(), []);
 $router->addHandler("/settings/*", SettingsPage::getInstance(), []);
 $router->addHandler("/admin/*", AdminPage::getInstance(), []);
 $router->addHandler("/compose/kicau/*", ComposePage::getInstance(), []);
+$router->addHandler("/home", LoginPage::getInstance(), []);
+$router->addHandler("/post", LoginPage::getInstance(), []);
 
 $router->run($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
