@@ -15,7 +15,7 @@ class PostModel extends BaseModel
 
     public $tags = [];
 
-    private function __construct()
+    public function __construct()
     {
         $this->_primary_key = ['post_id', 'owner_id'];
     }

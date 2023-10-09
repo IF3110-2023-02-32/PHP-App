@@ -49,7 +49,7 @@ CREATE TABLE "posts" (
 );
 -- CURRENT IMPLEMENTATION ONLY ACCEPTS "refer_type" values of {'Repost', 'Reply'}
 
-CREATE TABLE "images" (
+CREATE TABLE "post_resources" (
   "post_id" integer,
   "post_owner_id" integer,
   "path" varchar
@@ -83,11 +83,7 @@ COMMENT ON COLUMN "posts"."body" IS 'Content of the post';
 
 COMMENT ON COLUMN "posts"."refer_type" IS 'Refer type, e.g. Repost(Retweet), Reply';
 
-COMMENT ON COLUMN "images"."path" IS 'Path to the image in filesystem';
-
-COMMENT ON COLUMN "videos"."path" IS 'Path to the video in filesystem';
-
-COMMENT ON COLUMN "audios"."path" IS 'Path to the audio in filesystem';
+COMMENT ON COLUMN "post_resources"."path" IS 'Path to the resource in filesystem';
 
 COMMENT ON COLUMN "likes"."user_id" IS 'The user which likes the post';
 
@@ -103,11 +99,7 @@ ALTER TABLE "posts" ADD FOREIGN KEY ("owner_id") REFERENCES "users" ("id");
 
 ALTER TABLE "posts" ADD FOREIGN KEY ("refer_post", "refer_post_owner") REFERENCES "posts" ("post_id", "owner_id");
 
-ALTER TABLE "images" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
-
-ALTER TABLE "videos" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
-
-ALTER TABLE "audios" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
+ALTER TABLE "post_resources" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
 
 ALTER TABLE "likes" ADD FOREIGN KEY ("post_id", "post_owner_id") REFERENCES "posts" ("post_id", "owner_id");
 
