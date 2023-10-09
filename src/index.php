@@ -15,6 +15,7 @@ require_once CONTROLLER_PATH . "/Admin/BanController.php";
 require_once CONTROLLER_PATH . "/Admin/UnbanController.php";
 require_once CONTROLLER_PATH . "/Admin/SetAdmin.php";
 
+require_once CONTROLLER_PATH . "/Page/HomePage.php";
 require_once CONTROLLER_PATH . "/Page/LoginPage.php";
 require_once CONTROLLER_PATH . "/Page/ComposePage.php";
 require_once CONTROLLER_PATH . "/Page/SettingsPage.php";
@@ -31,11 +32,12 @@ $router->addHandler("/api/ban", BanController::getInstance(), []);
 $router->addHandler("/api/unban", UnbanController::getInstance(), []);
 $router->addHandler("/api/setadmin", SetAdminController::getInstance(), []);
 
+$router->addHandler("/", HomePage::getInstance(), []);
 $router->addHandler("/login", LoginPage::getInstance(), []);
 $router->addHandler("/compose/kicau", ComposePage::getInstance(), []);
+$router->addHandler("/compose/create", PostController::getInstance(), []);
 $router->addHandler("/*", UserPage::getInstance(), []);
 $router->addHandler("/settings/*", SettingsPage::getInstance(), []);
 $router->addHandler("/admin/*", AdminPage::getInstance(), []);
-$router->addHandler("/compose/kicau/*", ComposePage::getInstance(), []);
 
 $router->run($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

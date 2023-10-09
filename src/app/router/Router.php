@@ -47,8 +47,13 @@ class Router {
           echo $value[0]->handle($method, $match[1]);
           exit();
         }
+        else {
+          header("Location: /");
+          exit();
+        }
       }
     }
+    header("Location: /");
     throw new MethodNotAllowedException("Method not allowed");
   }
 

@@ -86,7 +86,7 @@ class PostController extends BaseController
     }
   }
 
-  public function compose()
+  protected function compose()
   {
     $resources = [];
 
@@ -109,5 +109,12 @@ class PostController extends BaseController
       $user_id,
       $resources
     );
+  }
+
+  protected function post($urlParams)
+  {
+    $this->compose();
+    require PAGE_PATH . "/submission.php";
+    exit();
   }
 }

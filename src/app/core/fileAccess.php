@@ -81,12 +81,13 @@ class FileAccess
             $newfilename = md5(uniqid(mt_rand(), true)) . (SUPPORTED_FILES[$filetype])[$mimetype];
         } while (file_exists($newDir . $filename));
 
-        $success = move_uploaded_file($filename, $newDir . $newfilename);
+        $newfilepath = $newDir . $newfilename;
+        $success = move_uploaded_file($filename, $newfilepath);
         if (!$success) {
             throw new LoggedException('Internal Server Error', 500);
         }
 
-        return $newfilename;
+        return $newfilepath;
     }
 
     /**
