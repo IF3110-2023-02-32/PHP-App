@@ -29,7 +29,7 @@
             <hr>
 
             <section class="submission">
-                <input type="submit" value="Post">
+                <input type="submit" id="btn-post" value="Post">
             </section>
         </form>
     </section>
