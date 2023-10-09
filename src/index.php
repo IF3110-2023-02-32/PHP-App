@@ -21,6 +21,8 @@ require_once CONTROLLER_PATH . "/Page/ComposePage.php";
 require_once CONTROLLER_PATH . "/Page/SettingsPage.php";
 require_once CONTROLLER_PATH . "/Page/AdminPage.php";
 require_once CONTROLLER_PATH . "/Page/UserPage.php";
+require_once CONTROLLER_PATH . "/Page/HomePage.php";
+require_once CONTROLLER_PATH . "/Page/PostPage.php";
 
 $router = new Router();
 

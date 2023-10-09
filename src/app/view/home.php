@@ -5,45 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="/public/css/home.css" />
+    <link rel="stylesheet" href="../../public/css/home.css" />
 </head>
 
 <body>
     <div class="layout">
         <div class="layout__left-sidebar">
-            <img src="/public/assets/github.png" class="brand" />
+            <img src="../../public/assets/github_home_logo.png" class="brand" />
             <div class="sidebar-menu">
                 <div class="sidebar-menu__item sidebar-menu__item--active">
-                    <img src="/public/assets/home.svg" class="sidebar-menu__item-icon" />
+                    <img src="../../public/assets/home.svg" class="sidebar-menu__item-icon" />
                     Home
                 </div>
                 <div class="sidebar-menu__item">
-                    <img src="/public/assets/followed.jpg" class="sidebar-menu__item-icon" />
+                    <img src="../../public/assets/followed.jpg" class="sidebar-menu__item-icon" />
                     Followed
                 </div>
-                <div class="sidebar-menu__item">
-                    <img src="/public/assets/profile.svg" class="sidebar-menu__item-icon" />
+                <div class="../../public/assets/sidebar-menu__item">
+                    <img src="../../public/assets/profile.svg" class="sidebar-menu__item-icon" />
                     Profile
                 </div>
             </div>
         </div>
         <div class="layout__main">
-            <img class="post__author-logo" src="./images/profile-image-1.jpg" />
+            <!-- <img class="post__author-logo" src="profile-image.jpg" /> -->
             <div class="post">
                 <div class="post__main">
                     <div class="post__header">
                         <div class="post__user-name">
-                           
+
                         </div>
                         <div class="post__user-username">
-                         
+
                         </div>
                         <div class="post__publish-time">
-                          
+
                         </div>
                     </div>
                     <div class="post__content">
-                   
+
                     </div>
                 </div>
             </div>
