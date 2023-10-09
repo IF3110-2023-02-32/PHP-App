@@ -55,18 +55,6 @@ CREATE TABLE "post_resources" (
   "path" varchar
 );
 
-CREATE TABLE "videos" (
-  "post_id" integer,
-  "post_owner_id" integer,
-  "path" varchar
-);
-
-CREATE TABLE "audios" (
-  "post_id" integer,
-  "post_owner_id" integer,
-  "path" varchar
-);
-
 CREATE TABLE "likes" (
   "post_id" integer,
   "post_owner_id" integer,

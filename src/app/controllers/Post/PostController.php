@@ -60,14 +60,30 @@ class PostController extends BaseController
     $postObj = new PostModel();
     $postObj = $postObj->constructFromArray($postArr);
 
-    $post_id = $srv->insert($postObj, array_keys($postArr), 'post_id');
+    $attributes = array_intersect_key(PostModel::$PDOATTR, $postArr);
+    $post_id = $srv->insert($postObj, $attributes, 'post_id');
 
     return $post_id;
   }
 
   protected function insertResources($post_id, $owner_id, $resources)
   {
+    $postResourceArr = [
+      'post_id' => $post_id,
+      'post_owner_id' => $owner_id,
+      'path' => null
+    ];
 
+    $postResourceSrv = PostResourceManager::getInstance();
+
+    foreach ($resources as $filename) {
+      $postResourceArr['path'] = $filename;
+      $postResourceObj = new PostResourceManager($postResourceArr);
+
+      
+      $attributes = array_intersect_key(PostResourceModel::$PDOATTR, $postArr);
+      $postResourceArr->insert($postResourceObj, $attributes);
+    }
   }
 
   public function compose()

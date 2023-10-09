@@ -1,10 +1,13 @@
 <?php
 
 abstract class BaseModel {
+  public static $PDOATTR = [];
   public $_primary_key = '';
 
-  public function __construct() {
-    return $this;
+  public function __construct($array = null) {
+    if(!is_null($array)){
+      $this->constructFromArray($array);
+    }
   }
 
   public function set($attribute, $value) {
@@ -16,7 +19,7 @@ abstract class BaseModel {
     return $this->$attribute;
   }
   
-  public function constructFromArray($array)
+  public final function constructFromArray($array)
   {
     foreach (array_keys($array) as $attribute) {
       $this->$attribute = $array[$attribute];
@@ -25,7 +28,7 @@ abstract class BaseModel {
     return $this;
   }
 
-  public function toArray()
+  public final function toArray()
   {
     $array = [];
     foreach ($this->_attributes as $attribute) {
