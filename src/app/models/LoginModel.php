@@ -27,8 +27,8 @@ class LoginModel
             $row = $result->fetchAll(PDO::FETCH_ASSOC);
             if ($row) {
                 if(password_verify($password, $row[0]['password_hashed'])){
-                    // $_SESSION['id'] = $row['id'];
-                    // $_SESSION['role'] = $row['role'];
+                    $_SESSION['user_id'] = $row['id'];
+                    $_SESSION['role'] = $row['role'];
                     return $row[0]['role'];
                 }
                 else{

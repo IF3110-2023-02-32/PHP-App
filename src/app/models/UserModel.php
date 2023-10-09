@@ -14,7 +14,7 @@ class UserModel
     }
 
     public function isLogin(){
-        return isset($_SESSION['id']);
+        return isset($_SESSION['user_id']);
     }
     protected static $instance;
 
