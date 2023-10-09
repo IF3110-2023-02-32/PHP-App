@@ -31,8 +31,9 @@ $router->addHandler("/api/unban", UnbanController::getInstance(), []);
 
 $router->addHandler("/login", LoginPage::getInstance(), []);
 $router->addHandler("/compose/kicau", ComposePage::getInstance(), []);
-$router->addHandler("/settings/*", SettingsPage::getInstance(), []);
-$router->addHandler("/admin", AdminPage::getInstance(), []);
 $router->addHandler("/*", UserPage::getInstance(), []);
+$router->addHandler("/settings/*", SettingsPage::getInstance(), []);
+$router->addHandler("/admin/*", AdminPage::getInstance(), []);
+$router->addHandler("/compose/kicau/*", ComposePage::getInstance(), []);
 
 $router->run($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
