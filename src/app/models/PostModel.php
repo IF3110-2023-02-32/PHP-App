@@ -4,6 +4,17 @@ require_once SRC_ROOT_PATH . '/app/baseclasses/BaseModel.php';
 
 class PostModel extends BaseModel
 {
+    public static $PDOATTR = [
+        'post_id' => PDO::PARAM_INT,
+        'owner_id' => PDO::PARAM_INT,
+        'body' => PDO::PARAM_STR,
+        'created_at' => PDO::PARAM_STR,
+        'refer_type' => PDO::PARAM_STR,
+        'refer_post' => PDO::PARAM_INT,
+        'refer_post_owner' => PDO::PARAM_INT,
+        'tags' => PDO::PARAM_STR
+    ];
+
     public $post_id;
     public $owner_id;
     public $body;
@@ -15,8 +26,9 @@ class PostModel extends BaseModel
 
     public $tags = [];
 
-    public function __construct()
+    public function __construct($array = null)
     {
+        parent::__construct($array);
         $this->_primary_key = ['post_id', 'owner_id'];
     }
 }

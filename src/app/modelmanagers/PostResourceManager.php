@@ -2,6 +2,8 @@
 
 require_once SRC_ROOT_PATH . "/baseclasses/BaseManager.php";
 
+require_once SRC_ROOT_PATH . "/models/PostResourceModel.php";
+
 class PostResourceManager extends BaseManager
 {
     protected static $instance;
