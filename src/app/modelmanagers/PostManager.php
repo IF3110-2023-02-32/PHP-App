@@ -1,8 +1,8 @@
 <?php
 
-require_once SRC_ROOT_PATH . "/baseclasses/BaseManager.php";
+require_once SRC_ROOT_PATH . "/app/baseclasses/BaseManager.php";
 
-require_once SRC_ROOT_PATH . "/models/PostModel.php";
+require_once SRC_ROOT_PATH . "/app/models/PostModel.php";
 
 class PostManager extends BaseManager
 {

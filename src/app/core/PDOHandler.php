@@ -1,9 +1,6 @@
 <?php
 
-
-
-
-class Database
+class PDOHandler
 {
     private static $instance;
 

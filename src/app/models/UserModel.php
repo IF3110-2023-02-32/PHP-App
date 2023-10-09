@@ -1,7 +1,7 @@
 <?php
 
 require_once SRC_ROOT_PATH . "/app/baseclasses/BaseModel.php";
-require_once SRC_ROOT_PATH . "/app/core/database.php";
+require_once SRC_ROOT_PATH . "/app/core/PDOHandler.php";
 
 class UserModel
 {
@@ -28,7 +28,7 @@ class UserModel
 
     public function getAllUser(){
         try{
-            $db = Database::getInstance()->getPDO();
+            $db = PDOHandler::getInstance()->getPDO();
             $sql = "SELECT * FROM users";
             $result = $db->query($sql);
             $hasil = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -40,7 +40,7 @@ class UserModel
     }
     public function getAllUserBan(){
         try{
-            $db = Database::getInstance()->getPDO();
+            $db = PDOHandler::getInstance()->getPDO();
             $sql = "SELECT * FROM users WHERE status = 'ban'";
             $result = $db->query($sql);
             $hasil = $result->fetchAll(PDO::FETCH_ASSOC);
@@ -52,7 +52,7 @@ class UserModel
     }
     public function getAllUserUnban(){
         try{
-            $db = Database::getInstance()->getPDO();
+            $db = PDOHandler::getInstance()->getPDO();
             $sql = "SELECT * FROM users WHERE status IS NULL and role = 'user'";
             $result = $db->query($sql);
             $hasil = $result->fetchAll(PDO::FETCH_ASSOC);

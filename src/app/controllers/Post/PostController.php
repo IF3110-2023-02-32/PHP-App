@@ -2,7 +2,7 @@
 
 require_once SRC_ROOT_PATH . "/app/baseclasses/BaseController.php";
 
-require_once SRC_ROOT_PATH . "app/core/FileAccess.php";
+require_once SRC_ROOT_PATH . "/app/core/FileAccess.php";
 
 require_once SRC_ROOT_PATH . "/app/models/PostModel.php";
 require_once SRC_ROOT_PATH . "/app/models/PostResourceModel.php";
