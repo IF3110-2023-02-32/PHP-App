@@ -16,6 +16,7 @@ class LoginController extends BaseController{
         }
         return self::$instance;
     }
+    
     public function post($urlParams){
         $username = $_POST['username'];
         $password = $_POST['password'];

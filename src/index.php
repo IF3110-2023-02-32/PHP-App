@@ -24,6 +24,10 @@ require_once CONTROLLER_PATH . "/Page/UserPage.php";
 require_once CONTROLLER_PATH . "/Page/HomePage.php";
 require_once CONTROLLER_PATH . "/Page/PostPage.php";
 
+require_once MIDDLEWARE_PATH . "/CheckAdmin.php";
+require_once MIDDLEWARE_PATH . "/CheckLogin.php";
+
+session_start();
 $router = new Router();
 
 // $router->addHandler("/example", BaseController::getInstance(), [BaseMiddleware::getInstance()]);
@@ -36,10 +40,11 @@ $router->addHandler("/api/setadmin", SetAdminController::getInstance(), []);
 
 $router->addHandler("/", HomePage::getInstance(), []);
 $router->addHandler("/login", LoginPage::getInstance(), []);
-$router->addHandler("/compose/kicau", ComposePage::getInstance(), []);
-$router->addHandler("/compose/create", PostController::getInstance(), []);
+$router->addHandler("/compose/kicau", ComposePage::getInstance(), [CheckLogin::getInstance()]);
+$router->addHandler("/compose/create", PostController::getInstance(), [CheckLogin::getInstance()]);
 $router->addHandler("/*", UserPage::getInstance(), []);
-$router->addHandler("/settings/*", SettingsPage::getInstance(), []);
-$router->addHandler("/admin/*", AdminPage::getInstance(), []);
+$router->addHandler("/settings/*", SettingsPage::getInstance(), [CheckLogin::getInstance()]);
+$router->addHandler("/admin/*", AdminPage::getInstance(), [CheckAdmin::getInstance()]);
+$router->addHandler("/*/status/*", PostPage::getInstance(), []);
 
 $router->run($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

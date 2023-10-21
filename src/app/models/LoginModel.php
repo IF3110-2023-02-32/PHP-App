@@ -24,12 +24,12 @@ class LoginModel
             $db = PDOHandler::getInstance()->getPDO();
             $sql = "SELECT * FROM users WHERE username = '$username'";
             $result = $db->query($sql);
-            $row = $result->fetchAll(PDO::FETCH_ASSOC);
+            $row = $result->fetch(PDO::FETCH_ASSOC);
             if ($row) {
-                if(password_verify($password, $row[0]['password_hashed'])){
+                if(password_verify($password, $row['password_hashed'])){
                     $_SESSION['user_id'] = $row['id'];
                     $_SESSION['role'] = $row['role'];
-                    return $row[0]['role'];
+                    return $row['role'];
                 }
                 else{
                     return null;
@@ -43,12 +43,11 @@ class LoginModel
             return null;
         }
     }
+
     public function logout(){
         unset($_SESSION['id']);
         unset($_SESSION['role']);
     }
-
-
 
 }
 

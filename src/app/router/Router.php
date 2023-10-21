@@ -22,10 +22,6 @@ class Router {
       
     } catch (Exception $e) {
       header("HTTP/1.0 500 Internal Server Error");
-      
-    } catch (Exception $e) {
-      Logger::error($e->getMessage());
-      header("HTTP/1.0 500 Internal Server Error");
     }
   }
 

@@ -39,7 +39,7 @@ document.getElementById('tmblbuatlogin').addEventListener('click', function() {
                         window.location.href = "/admin";//nanti diganti
                     }
                     else if(response.role==="user"){
-                        window.location.href = "/user";//nanti diganti
+                        window.location.href = "/";
                     }
                 }
             } else {
