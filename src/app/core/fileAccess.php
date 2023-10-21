@@ -2,25 +2,26 @@
 
 class FileAccess
 {
-    private $fileDir;
+    private const STORAGE_DIR = SRC_ROOT_PATH . '/storage';
+
+    private static $instance;
 
     public const PROFILES_PATH = '/profiles';
     public const BANNERS_PATH = '/banners';
     public const POSTS_PATH = '/posts';
 
     public const FILE_TYPE_PATH = [
-        VIDEO_TYPE => '/videos/',
-        AUDIO_TYPE => '/audios/',
-        IMAGE_TYPE => '/images/'
+        VIDEO_TYPE => '/video/',
+        AUDIO_TYPE => '/audio/',
+        IMAGE_TYPE => '/image/'
     ];
 
-    /**
-     * Constructs file access object to store/remove files.
-     * $dir is used to specify directory of file to be stored.
-     */
-    public function __construct(string $dir)
+    public static function getInstance()
     {
-        $this->fileDir = SRC_ROOT_PATH . '/storage' . $dir;
+        if (!isset(self::$instance)) {
+            self::$instance = new static();
+        }
+        return self::$instance;
     }
 
     /**
@@ -59,9 +60,9 @@ class FileAccess
      * Saves the file to its corresponding categorized directory.
      * Returns the new file name due to renaming for collision prevention
      */
-    public function saveFileAuto(string $filename)
+    public function saveFile(string $filename, string $dir, string $mimetype)
     {
-        $mimetype = mime_content_type($filename); // get file MIME type
+        // $mimetype = mime_content_type($filename); // get file MIME type
         $filetype = $this->getFileTypeFromMIME($mimetype);
 
         // Check the file type, if not supported, throw exception
@@ -75,7 +76,7 @@ class FileAccess
             throw new LoggedException('Request Entity Too Large', 413);
         }
 
-        $newDir = $this->storageDir . FileAccess::FILE_TYPE_PATH[$filetype];
+        $newDir = FileAccess::STORAGE_DIR . $dir . FileAccess::FILE_TYPE_PATH[$filetype];
         // Generate new file name to keep in same directory to prevent overwriting 
         do {
             $newfilename = md5(uniqid(mt_rand(), true)) . (SUPPORTED_FILES[$filetype])[$mimetype];

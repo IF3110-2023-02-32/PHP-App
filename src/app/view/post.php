@@ -13,18 +13,18 @@
     <section id="overlay">
         <img src="/public/assets/Logo.png" alt="Kicau Logo" id="logo">
         <hr>
-        <form action="create" method="POST">
+        <form enctype="multipart/form-data" action="create" method="POST">
             <h1>Create a post!</h1>
-            <section class="text-input">
-                <label for="textarea-input">Type in the box below:</label>
+            <section class="post_body">
+                <label for="post_body">Type in the box below:</label>
                 <br>
-                <textarea id="textarea-input" name="textarea-input" rows="15" cols="70"></textarea>
+                <textarea id="post_body" name="post_body" rows="15" cols="70"></textarea>
             </section>
             <br>
 
             <section class="file">
-                <label for="file-input">Select a file:</label>
-                <input type="file" id="file-input" name="image-input">
+                <label for="file_input">Select a file:</label>
+                <input type="file" id="file_input" name="file_input">
             </section>
             <hr>
 

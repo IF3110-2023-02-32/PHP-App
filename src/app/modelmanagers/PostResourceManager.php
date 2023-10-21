@@ -9,7 +9,7 @@ class PostResourceManager extends BaseManager
     protected static $instance;
     protected $tableName = 'post_resources';
 
-    protected function __construct()
+    public function __construct()
     {
       parent::__construct();
     }
@@ -20,5 +20,9 @@ class PostResourceManager extends BaseManager
         self::$instance = new static();
       }
       return self::$instance;
+    }
+    
+    public function get($attribute) {
+      return $this->$attribute;
     }
 }

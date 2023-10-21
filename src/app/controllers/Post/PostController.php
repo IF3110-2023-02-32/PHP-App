@@ -54,14 +54,17 @@ class PostController extends BaseController
     }
 
     if(isset($tags)) {
-      $postArr['tags'] = $tags;
+      $tagsSQL = BaseManager::arrToSQLArr($tags);
+      $postArr['tags'] = $tagsSQL;
     }
 
     $postObj = new PostModel();
     $postObj = $postObj->constructFromArray($postArr);
 
     $attributes = array_intersect_key(PostModel::$PDOATTR, $postArr);
+
     $post_id = $this->srv->insert($postObj, $attributes, 'post_id');
+    $post_id = $post_id[0]['post_id'];
 
     return $post_id;
   }
@@ -78,31 +81,31 @@ class PostController extends BaseController
 
     foreach ($resources as $filename) {
       $postResourceArr['path'] = $filename;
-      $postResourceObj = new PostResourceManager($postResourceArr);
+      $postResourceObj = new PostResourceModel($postResourceArr);
 
-      
-      $attributes = array_intersect_key(PostResourceModel::$PDOATTR, $postArr);
-      $postResourceArr->insert($postResourceObj, $attributes);
+      $attributes = array_intersect_key(PostResourceModel::$PDOATTR, $postResourceArr);
+      $postResourceSrv->insert($postResourceObj, $attributes);
     }
   }
 
   protected function compose()
   {
-    $resources = [];
-
-    if(isset($_FILES['file']['tmp_name'])) {
-      $fileAccess = new FileAccess(FileAccess::POSTS_PATH);
-      $newFileName = $fileAccess->saveFileAuto($_FILES['file']['tmp_name']);
-
-      $resources[] = $newFileName;
-    }
-
     // insert post tweetpost here
     $user_id = $_SESSION['user_id'];
     $post_id = $this->createPost(
       owner_id: $user_id,
-      body: $_POST['body'],
+      body: $_POST['post_body'],
     );
+
+    $resources = [];
+
+    // var_dump($_FILES);
+    if(isset($_FILES['file_input']['tmp_name'])) {
+      $fileAccess = FileAccess::getInstance();
+      $newFileName = $fileAccess->saveFile($_FILES['file_input']['tmp_name'], FileAccess::POSTS_PATH, $_FILES['file_input']['type']);
+
+      $resources[] = $newFileName;
+    }
 
     $this->insertResources(
       $post_id,

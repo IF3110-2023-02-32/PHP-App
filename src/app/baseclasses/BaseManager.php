@@ -156,15 +156,20 @@ abstract class BaseManager
 
     $sql .= ")";
 
+    if(!is_null($retIDName)) $sql .= "RETURNING $retIDName";
+
     // Start preparing statement for execute(), prevent SQL Injection using bindValue()
     $stmt = $this->pdo->prepare($sql);
 
+    var_dump($attributes);
     foreach ($attributes as $attribute => $type) {
       $stmt->bindValue(":$attribute", $model->get($attribute), $type);
     }
 
     $stmt->execute();
-    return $this->pdo->lastInsertId($retIDName);
+
+    if(!is_null($retIDName)) return $stmt->fetchAll();
+    return null;
   }
 
   public function update($model, $attributes) // attributes[$attribute] = $type
