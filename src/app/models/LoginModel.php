@@ -29,7 +29,8 @@ class LoginModel
                 if(password_verify($password, $row['password_hashed'])){
                     $_SESSION['user_id'] = $row['id'];
                     $_SESSION['role'] = $row['role'];
-                    return $row['role'];
+                    $array = array('status' => $row['status'], 'role' => $row['role']);
+                    return $array;
                 }
                 else{
                     return null;

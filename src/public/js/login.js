@@ -39,7 +39,13 @@ document.getElementById('tmblbuatlogin').addEventListener('click', function() {
                         window.location.href = "/admin/*";//nanti diganti
                     }
                     else if(response.role==="user"){
-                        window.location.href = "/";
+                        if(response.statusakses==="ban"){
+                            alert("Akun anda telah diblokir oleh admin");
+                        }
+                        else
+                        {
+                            window.location.href = "/";
+                        }
                     }
                 }
             } else {

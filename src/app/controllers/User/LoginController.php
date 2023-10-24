@@ -25,7 +25,9 @@ class LoginController extends BaseController{
         if($role!=null){
             $hasiljson = array(
                 'status' => 'sukses',
-                'role' => $role
+                'role' => $role['role'],
+                'statusakses' => $role['status']
+
             );
             header('Content-Type: application/json');
             return json_encode($hasiljson);
