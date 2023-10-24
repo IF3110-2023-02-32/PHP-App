@@ -41,7 +41,7 @@ class UserModel
     public function getAllUserBan(){
         try{
             $db = PDOHandler::getInstance()->getPDO();
-            $sql = "SELECT * FROM users WHERE status = 'ban'";
+            $sql = "SELECT * FROM users WHERE status = 'ban' ORDER BY id";
             $result = $db->query($sql);
             $hasil = $result->fetchAll(PDO::FETCH_ASSOC);
             return $hasil;
@@ -53,7 +53,7 @@ class UserModel
     public function getAllUserUnban(){
         try{
             $db = PDOHandler::getInstance()->getPDO();
-            $sql = "SELECT * FROM users WHERE status IS NULL and role = 'user'";
+            $sql = "SELECT * FROM users WHERE status IS NULL and role = 'user' ORDER BY id";
             $result = $db->query($sql);
             $hasil = $result->fetchAll(PDO::FETCH_ASSOC);
             return $hasil;

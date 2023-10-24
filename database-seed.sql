@@ -162,3 +162,16 @@ CREATE TRIGGER validate_post_reference
 INSERT INTO user_roles(role) VALUES('admin');
 INSERT INTO user_roles(role) VALUES('moderator');
 INSERT INTO user_roles(role) VALUES('user');
+
+INSERT INTO users(username, profile_name, password_hashed, role)
+SELECT
+  LEFT(md5(random()::text), 10),
+  LEFT(md5(random()::text), 10),
+  LEFT(md5(random()::text), 10),
+  'user'
+FROM generate_series(1, 10000);
+
+INSERT INTO users(username, profile_name, password_hashed, role) VALUES ('admin', 'admin', '$2y$10$nl3.uDTAK0wbkNUr6JwZ1OG6dzh0HilmzK3QZXwARbz2oP71mR3zO', 'admin');
+
+
+

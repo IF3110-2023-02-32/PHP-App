@@ -1,8 +1,6 @@
 
-
-// Fungsi untuk membuat daftar orang dari data JSON
-function createPersonList(data) {
-    const personList = document.getElementById("person-list");
+function createPersonListunban(data) {
+    const personList = document.getElementById("person-list-unban");
     data.forEach((person) => {
         const personDiv = document.createElement("div");
         personDiv.classList.add("person");
@@ -16,28 +14,20 @@ function createPersonList(data) {
         username.classList.add("username");
 
         const printButton = document.createElement("button");
-        printButton.textContent = "Ban";
+        printButton.textContent = "Unban";
         printButton.addEventListener("click", () => {
-            banId(person.id);
-        });
-
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
-        deleteButton.addEventListener("click", () => {
-            deleteId(person.id);
+            unbanId(person.id);
         });
 
         personDiv.appendChild(nameSpan);
         personDiv.appendChild(username);
         personDiv.appendChild(printButton);
-        personDiv.appendChild(deleteButton);
         personList.appendChild(personDiv);
-
     });
 }
-function banId(personId) {
+function unbanId(personId) {
     const xhr = new XMLHttpRequest();
-        const url = 'http://localhost:8008/api/ban';
+        const url = 'http://localhost:8008/api/unban';
         
         xhr.open('POST', url, true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -56,30 +46,9 @@ function banId(personId) {
         
         const formData = `id=${encodeURIComponent(personId)}`;
         xhr.send(formData);
-}
-function deleteId(personId) {
-    const xhr = new XMLHttpRequest();
-    const url = 'http://localhost:8008/api/deleteuser';
-    
-    xhr.open('POST', url, true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-            const response = JSON.parse(xhr.responseText);
-            alert(response.message);
-            window.location.reload();
-        } else {
-            console.error('Gagal melakukan permintaan');
-        }
-        }
-    };
-    
-    const formData = `id=${encodeURIComponent(personId)}`;
-    xhr.send(formData);
     
 }
+
 const xhr = new XMLHttpRequest();
 const url = 'http://localhost:8008/api/admin';
 
@@ -95,7 +64,7 @@ xhr.onreadystatechange = function () {
         }
         else if(response.status==="sukses"){
             console.log(response);
-            createPersonList(response.unban);
+            createPersonListunban(response.ban);
         }
     } else {
         console.error('Gagal melakukan permintaan');
@@ -105,7 +74,7 @@ xhr.onreadystatechange = function () {
 xhr.send();
 
 document.getElementById('tmbltobaned').addEventListener('click', function() {
-    window.location.href = "/admin/unban/*";
+    window.location.href = "/admin/*";
 });
 const valuedropdown = document.querySelector('#dropdown');
 const search = document.querySelector('#searchtext');
@@ -131,7 +100,7 @@ document.getElementById('search').addEventListener('click', function() {
                         hapus.forEach(function(e){
                             e.remove();
                         });
-                        createPersonList(response.unban);
+                        createPersonListunban(response.ban);
                     }
                 } else {
                     console.error('Gagal melakukan permintaan');
@@ -158,10 +127,10 @@ document.getElementById('search').addEventListener('click', function() {
                     else if(response.status==="sukses"){
                         // console.log(response);
                         let ambil = [];
-                        for(let i=0;i<response.unban.length;i++){
+                        for(let i=0;i<response.ban.length;i++){
                             var regex = new RegExp(`.*${search.value}.*`);
-                            if(regex.test(response.unban[i].username)){
-                                ambil.push(response.unban[i]);
+                            if(regex.test(response.ban[i].username)){
+                                ambil.push(response.ban[i]);
                             }
                         }
                         if(ambil.length===0){
@@ -173,7 +142,7 @@ document.getElementById('search').addEventListener('click', function() {
                             hapus.forEach(function(e){
                                 e.remove();
                             });
-                            createPersonList(ambil);
+                            createPersonListunban(ambil);
                         }
                     }
                 } else {
@@ -206,7 +175,7 @@ document.getElementById('search').addEventListener('click', function() {
                         hapus.forEach(function(e){
                             e.remove();
                         });
-                        createPersonList(response.unban);
+                        createPersonListunban(response.ban);
                     }
                 } else {
                     console.error('Gagal melakukan permintaan');
@@ -232,11 +201,11 @@ document.getElementById('search').addEventListener('click', function() {
                     else if(response.status==="sukses"){
                         // console.log(response);
                         let ambil = [];
-                        for(let i=0;i<response.unban.length;i++){
+                        for(let i=0;i<response.ban.length;i++){
                             var regex = new RegExp(`.*${search.value}.*`);
-                            if(regex.test(response.unban[i].profile_name)){
-                                console.log(response.unban[i].profile_name);
-                                ambil.push(response.unban[i]);
+                            if(regex.test(response.ban[i].profile_name)){
+                                console.log(response.ban[i].profile_name);
+                                ambil.push(response.ban[i]);
                             }
                         }
                         if(ambil.length===0){
@@ -248,7 +217,7 @@ document.getElementById('search').addEventListener('click', function() {
                             hapus.forEach(function(e){
                                 e.remove();
                             });
-                            createPersonList(ambil);
+                            createPersonListunban(ambil);
                         }
                     }
                 } else {

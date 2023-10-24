@@ -36,7 +36,7 @@ document.getElementById('tmblbuatlogin').addEventListener('click', function() {
                 }
                 else if(response.status==="sukses"){
                     if(response.role==="admin"){
-                        window.location.href = "/admin";//nanti diganti
+                        window.location.href = "/admin/*";//nanti diganti
                     }
                     else if(response.role==="user"){
                         window.location.href = "/";

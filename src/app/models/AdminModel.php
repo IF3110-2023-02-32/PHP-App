@@ -63,6 +63,24 @@ class AdminModel
         }
     }
 
+    public function deleteUser($user_id){
+        try{
+            $db = PDOHandler::getInstance()->getPDO();
+            $sql1 = "DELETE FROM users_detail WHERE id = $user_id";
+            $sql = "DELETE FROM users WHERE id = $user_id";
+            $result1 = $db->query($sql1);
+            $result = $db->query($sql);
+            if($result && $result1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }catch(Exception $e){
+            return false;
+        }
+    }
+
 }
 
 ?>
