@@ -6,12 +6,16 @@ html {
     height: 70px;
     padding: 10px;
 }
-
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .layout {
     display: grid;
-    grid-template-columns: 275px auto 350px;
-    margin: 0 auto;
-    max-width: 1200px;
+    grid-template-columns: 275px auto 150px;
+    /* margin: 0 auto; */
+    /* max-width: 2200px; */
 }
 
 .layout__right-sidebar {
@@ -88,25 +92,117 @@ html {
     display: flex;
 }
 
-.post__user-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: #14171a;
-    margin-right: 5px;
+.list-post {
+    justify-content: right;
+    position: absolute;
+    top: 10%;
+    left: 40%;
 }
 
-.post__user-username {
-    color: #5b7083;
-    font-size: 15px;
-}
-
-.post__publish-time {
-    margin-left: 5px;
-    color: #657786;
-}
-
-.post__image {
-    width: 100%;
-    border-radius: 15px;
+.box {
+    border: 2px solid #333;
+    padding: 20px;
+    max-width: 100%;
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 500%;
+    word-wrap: break-word; 
+    overflow: hidden;
+    border-radius: 20px;
+
+}
+
+img {
+    max-width: 100%;
+    border-radius: 20px;
+}
+.fotoprofil{
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    float: left;
+
+}
+.iden{
+    display: flex;
+    word-wrap: break-word; 
+    overflow: hidden;
+    max-width: 100%;
+    border-bottom: 1px solid #333;
+}
+.kolom{
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word; 
+    overflow: hidden;
+    max-width: 100%;
+}
+.pagination ul{
+    display: flex;
+    background: #533451;
+    padding: 8px;
+    border-radius: 50px;
+}
+.pagination ul li{
+    color: #fff;
+    list-style: none;
+    line-height: 45px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.3s ease-in-out;
+}
+.pagination ul li.numb{
+    height: 45px;
+    width: 45px;
+}
+.pagination ul li.btn{
+    padding: 0 20px;
+
+}
+.pagination ul li.prev{
+    border-radius: 25px 5px 5px 25px;
+
+}
+.pagination ul li.next{
+    border-radius: 5px 25px 25px 5px;
+
+}
+.pagination ul li.numb:hover{
+    background: #1b94e0;
+    color: #fff;
+}
+.pagination ul li.btn:hover{
+    background: #1b94e0;
+    color: #fff;
+}
+.pagination ul li.dots{
+   font-size: 22px;
+   cursor: default;
+
+}
+.pagination ul li.active
+{
+    background-color: #1b94e0;
+}
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.kosong{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+
+    font-weight: 600;
+    color: #fff;
 }

@@ -15,6 +15,7 @@ require_once CONTROLLER_PATH . "/Admin/BanController.php";
 require_once CONTROLLER_PATH . "/Admin/UnbanController.php";
 require_once CONTROLLER_PATH . "/Admin/SetAdmin.php";
 require_once CONTROLLER_PATH . "/Admin/DeleteUserController.php";
+require_once CONTROLLER_PATH . "/Home/GetPostController.php";
 
 require_once CONTROLLER_PATH . "/Page/HomePage.php";
 require_once CONTROLLER_PATH . "/Page/LoginPage.php";
@@ -40,6 +41,7 @@ $router->addHandler("/api/ban", BanController::getInstance(), []);
 $router->addHandler("/api/unban", UnbanController::getInstance(), []);
 $router->addHandler("/api/setadmin", SetAdminController::getInstance(), []);
 $router->addHandler("/api/deleteuser", DeleteUserController::getInstance(), []);
+$router->addHandler("/api/getpost/*", GetPostController::getInstance(), []);
 
 $router->addHandler("/", HomePage::getInstance(), []);
 $router->addHandler("/login", LoginPage::getInstance(), []);

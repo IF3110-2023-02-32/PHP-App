@@ -27,28 +27,9 @@
                 </div>
             </div>
         </div>
-        <div class="layout__main">
-            <!-- <img class="post__author-logo" src="profile-image.jpg" /> -->
-            <div class="post">
-                <div class="post__main">
-                    <div class="post__header">
-                        <div class="post__user-name">
-
-                        </div>
-                        <div class="post__user-username">
-
-                        </div>
-                        <div class="post__publish-time">
-
-                        </div>
-                    </div>
-                    <div class="post__content">
-
-                    </div>
-                </div>
-            </div>
+        <div id="list-post">
         </div>
     </div>
+    <script src="/public/js/home.js"></script>
 </body>
-
 </html>

@@ -1,24 +1,23 @@
 <?php
 
 require_once SRC_ROOT_PATH . "/app/baseclasses/BaseController.php";
-require_once SRC_ROOT_PATH . "/app/models/AdminModel.php";
-
-class DeleteUserController extends BaseController{
+require_once SRC_ROOT_PATH . "/app/models/HomeModel.php";
+class GetPostController extends BaseController{
     protected static $instance;
     public static function getInstance(){
         if(!isset(self::$instance)){
-            self::$instance = new static(AdminModel::getInstance());
+            self::$instance = new static(HomeModel::getInstance());
         }
         return self::$instance;
     }
-    public function delete($urlParams){
-        parse_str(file_get_contents('php://input'), $_DELETE);
-        $user_id = $_DELETE['id'];
-        $hasil = $this->srv->deleteUser($user_id);
-        if($hasil==true){
+    public function get($urlParams){
+        $page = $urlParams[0];
+        $data = $this->srv->getPostPage($page);
+        if($data!=null){
             $hasiljson = array(
                 'status' => 'sukses',
-                'message' => 'User berhasil di hapus'
+                'message' => 'Berhasil mendapatkan post',
+                'data' => $data
             );
             header('Content-Type: application/json');
             return json_encode($hasiljson);
@@ -26,14 +25,13 @@ class DeleteUserController extends BaseController{
         else{
             $hasiljson = array(
                 'status' => 'error',
-                'message' => 'User gagal di hapus'
+                'message' => 'Gagal mendapatkan post'
             );
             header('Content-Type: application/json');
             return json_encode($hasiljson);
             
         }
     }
-        
 }
 
 ?>

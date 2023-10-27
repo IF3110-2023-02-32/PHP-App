@@ -39,7 +39,7 @@ function banId(personId) {
     const xhr = new XMLHttpRequest();
         const url = 'http://localhost:8008/api/ban';
         
-        xhr.open('POST', url, true);
+        xhr.open('PUT', url, true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         
         xhr.onreadystatechange = function () {
@@ -61,7 +61,7 @@ function deleteId(personId) {
     const xhr = new XMLHttpRequest();
     const url = 'http://localhost:8008/api/deleteuser';
     
-    xhr.open('POST', url, true);
+    xhr.open('DELETE', url, true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     
     xhr.onreadystatechange = function () {

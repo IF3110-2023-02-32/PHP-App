@@ -29,7 +29,7 @@ function unbanId(personId) {
     const xhr = new XMLHttpRequest();
         const url = 'http://localhost:8008/api/unban';
         
-        xhr.open('POST', url, true);
+        xhr.open('PUT', url, true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         
         xhr.onreadystatechange = function () {

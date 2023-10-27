@@ -10,8 +10,9 @@ class BanController extends BaseController{
         }
         return self::$instance;
     }
-    public function post($urlParams){
-        $user_id = $_POST['id'];
+    public function put($urlParams){
+        parse_str(file_get_contents('php://input'), $_PUT);
+        $user_id = $_PUT['id'];
         $hasil = $this->srv->banUser($user_id);
         if($hasil==true){
             $hasiljson = array(
