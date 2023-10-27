@@ -21,8 +21,4 @@ class PostResourceManager extends BaseManager
       }
       return self::$instance;
     }
-    
-    public function get($attribute) {
-      return $this->$attribute;
-    }
 }

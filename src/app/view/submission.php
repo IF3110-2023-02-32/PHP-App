@@ -10,7 +10,7 @@
 
 <body>
     <section id="overlay">
-        <img src="/public/assets/github_post_logo.jpg" alt="Github Logo" id="logo">
+        <img src="/public/assets/Logo.png" alt="Github Logo" id="logo">
         <hr>
         <h1>You have made a new post!</h1>
     </section>

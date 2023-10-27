@@ -4,6 +4,8 @@ require_once SRC_ROOT_PATH . "/app/baseclasses/BaseManager.php";
 
 require_once SRC_ROOT_PATH . "/app/models/PostModel.php";
 
+require_once SRC_ROOT_PATH . "/app/modelmanagers/PostResourceManager.php";
+
 class PostManager extends BaseManager
 {
   protected static $instance;
@@ -93,6 +95,17 @@ class PostManager extends BaseManager
       $attributes = array_intersect_key(PostResourceModel::$PDOATTR, $postResourceArr);
       $postResourceSrv->insert($postResourceObj, $attributes);
     }
+  }
+
+  public function getResources($post_id, $post_owner_id)
+  {
+    $postResourceSrv = PostResourceManager::getInstance();
+
+    $where = [
+      "post_id" => ["=", $post_id, PostResourceModel::$PDOATTR["post_id"]],
+      "post_owner_id" => ["=", $post_owner_id, PostResourceModel::$PDOATTR["post_owner_id"]]
+    ];
+    return $postResourceSrv->findAll();
   }
 
   public function getByUser($user_id)
