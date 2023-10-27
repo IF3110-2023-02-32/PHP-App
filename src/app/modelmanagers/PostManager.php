@@ -35,6 +35,66 @@ class PostManager extends BaseManager
     return $where;
   }
 
+  public function createPost(
+    $owner_id,
+    $body,
+    $refer_type = null,
+    $refer_post = null,
+    $refer_post_owner = null
+    )
+  {
+    preg_match_all("/(#\w+)/u", $body, $matches);  
+    if ($matches) {
+        $tagsArray = array_count_values($matches[0]);
+        $tags = array_keys($tagsArray);
+    }
+
+    $postArr = [
+      'owner_id' => $owner_id,
+      'body' => $body
+    ];
+
+    if(!is_null($refer_type)) {
+      $postArr['refer_type'] = $refer_type;
+      $postArr['refer_post'] = $refer_post;
+      $postArr['refer_post_owner'] = $refer_owner;
+    }
+
+    if(isset($tags)) {
+      $tagsSQL = BaseManager::arrToSQLArr($tags);
+      $postArr['tags'] = $tagsSQL;
+    }
+
+    $postObj = new PostModel();
+    $postObj = $postObj->constructFromArray($postArr);
+
+    $attributes = array_intersect_key(PostModel::$PDOATTR, $postArr);
+
+    $post_id = $this->insert($postObj, $attributes, 'post_id');
+    $post_id = $post_id['post_id'];
+
+    return $post_id;
+  }
+
+  public function insertResources($post_id, $owner_id, $resources)
+  {
+    $postResourceArr = [
+      'post_id' => $post_id,
+      'post_owner_id' => $owner_id,
+      'path' => null
+    ];
+
+    $postResourceSrv = PostResourceManager::getInstance();
+
+    foreach ($resources as $filename) {
+      $postResourceArr['path'] = $filename;
+      $postResourceObj = new PostResourceModel($postResourceArr);
+
+      $attributes = array_intersect_key(PostResourceModel::$PDOATTR, $postResourceArr);
+      $postResourceSrv->insert($postResourceObj, $attributes);
+    }
+  }
+
   public function getByUser($user_id)
   {
     $where = PostManager::getUserSelection($user_id);

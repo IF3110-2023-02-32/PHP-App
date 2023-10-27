@@ -38,7 +38,7 @@ abstract class BaseManager
   }
 
   public function countRow($where = []) {
-    $sql = "SELECT COUNT(*) FROM $this->tableName";
+    $sql = "SELECT COUNT(*) AS count FROM $this->tableName";
 
     if (count($where) > 0) {
       $sql .= " WHERE ";
@@ -161,14 +161,13 @@ abstract class BaseManager
     // Start preparing statement for execute(), prevent SQL Injection using bindValue()
     $stmt = $this->pdo->prepare($sql);
 
-    var_dump($attributes);
     foreach ($attributes as $attribute => $type) {
       $stmt->bindValue(":$attribute", $model->get($attribute), $type);
     }
 
     $stmt->execute();
 
-    if(!is_null($retIDName)) return $stmt->fetchAll();
+    if(!is_null($retIDName)) return $stmt->fetch();
     return null;
   }
 

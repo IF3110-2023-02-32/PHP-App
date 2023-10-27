@@ -1,5 +1,7 @@
 <?php
 
+require_once SRC_ROOT_PATH . "/app/exceptions/LoggedException.php";
+
 class FileAccess
 {
     private const STORAGE_DIR = SRC_ROOT_PATH . '/storage';
