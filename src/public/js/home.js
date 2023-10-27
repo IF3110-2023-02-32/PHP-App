@@ -36,9 +36,9 @@ function createPost(data,totalsemuapage,pagenow){
 
         let gettype = element.path
         let type = gettype.split('.').pop();
-        // var pathToRemove = "/var/www/html";
-        // var path = element.path; /*kalo pake ini yang langsung ke path ngga bisa*/
-        var path = '/public/assets/kajuha.jpg'/*kalo pake ini bisa*/
+        var pathToRemove = "/var/www/html";
+        var path = element.path;
+        path = path.replace(pathToRemove, '');
         console.log(path);
         if(type=='jpg' || type=='jpeg' || type=='png'){
             const isifoto = document.createElement('img');
