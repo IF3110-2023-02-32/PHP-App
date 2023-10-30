@@ -186,3 +186,11 @@ body{
     border-radius: 10px;
     border-bottom: #ce9f9f;
 }
+.tmbltologout{
+    background-color: #FF0000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}

@@ -107,6 +107,25 @@ xhr.send();
 document.getElementById('tmbltobaned').addEventListener('click', function() {
     window.location.href = "/admin/unban/*";
 });
+document.getElementById('logout').addEventListener('click', function() {
+    const xhr = new XMLHttpRequest();
+    const url = 'http://localhost:8008/api/logout';
+
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            alert("Berhasil Logout");
+        } else {
+            console.error('Gagal melakukan permintaan');
+        }
+        }
+    };
+    xhr.send();
+    window.location.href = "/login";
+});
 const valuedropdown = document.querySelector('#dropdown');
 const search = document.querySelector('#searchtext');
 document.getElementById('search').addEventListener('click', function() {

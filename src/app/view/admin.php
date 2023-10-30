@@ -38,6 +38,9 @@
     <div class="tmbltoban">
         <button class="tmbltobaned" id="tmbltobaned"">Unban</button>
     </div>
+    <div class="tmbltoban">
+        <button class="tmbltologout" id="logout"">Logout</button>
+    </div>
     <script src="/public/js/admin.js"></script>
 </body>
 </html>

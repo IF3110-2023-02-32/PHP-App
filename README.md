@@ -34,12 +34,12 @@ Aplikasi web ini merupakan aplikasi web yang digunakan untuk memudahkan pengguna
 
 | NIM      | Nama | Tugas yang dikerjakan | 
 | ----------- | ----------- | ----------- |
-| 13521098      | Fazel Ginanda       | Home dan Post (Server-Client Side) |
+| 13521098      | Fazel Ginanda       | Home dan Post (Client Side) |
 | 13521138   | Johann Christian Kandani      | Profile, Profile Management  (Server-Client Side), Base Classes, Config DB, Setup Docker |
-| 13521159   | Sulthan Dzaky Alfaro      | Login, Registrasi, dan Admin (Server-Client Side) |
+| 13521159   | Sulthan Dzaky Alfaro      | Login, Registrasi, Admin dan Home (Server-Client Side) |
 
 Server Side:
-- Home : Fazel Ginanda (13521098)
+- Home : Sulthan Dzaky Alfaro (13521159)
 - Post : Fazel Ginanda (13521098)
 - Profile : Johann Christian Kandani (13521138)
 - Profile Management : Johann Christian Kandani (13521138)
@@ -48,7 +48,7 @@ Server Side:
 - Admin : Sulthan Dzaky Alfaro (13521159)
 
 Client Side:
-- Home : Fazel Ginanda (13521098)
+- Home : Fazel Ginanda (13521098), Sulthan Dzaky Alfaro (13521159)
 - Post : Fazel Ginanda (13521098)
 - Profile : Johann Christian Kandani (13521138)
 - Profile Management : Johann Christian Kandani (13521138)
