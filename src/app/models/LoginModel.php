@@ -27,10 +27,17 @@ class LoginModel
             $row = $result->fetch(PDO::FETCH_ASSOC);
             if ($row) {
                 if(password_verify($password, $row['password_hashed'])){
-                    $_SESSION['user_id'] = $row['id'];
-                    $_SESSION['role'] = $row['role'];
-                    $array = array('status' => $row['status'], 'role' => $row['role']);
-                    return $array;
+                    if($row['status'] == 'ban'){
+                        $array = array('status' => $row['status'], 'role' => $row['role']);
+                        return $array;
+                    }
+                    else
+                    {
+                        $_SESSION['user_id'] = $row['id'];
+                        $_SESSION['role'] = $row['role'];
+                        $array = array('status' => $row['status'], 'role' => $row['role']);
+                        return $array;
+                    }
                 }
                 else{
                     return null;
@@ -46,7 +53,7 @@ class LoginModel
     }
 
     public function logout(){
-        unset($_SESSION['id']);
+        unset($_SESSION['user_id']);
         unset($_SESSION['role']);
     }
 

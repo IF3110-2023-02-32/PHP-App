@@ -19,7 +19,7 @@ class HomeModel
         try{
             $db = PDOHandler::getInstance()->getPDO();
             $page = $page * 10;
-            $sql = "SELECT * FROM posts as p JOIN post_resources as pr ON p.post_id=pr.post_id AND p.owner_id=pr.post_owner_id JOIN users as u ON p.owner_id=u.id ORDER BY p.post_id DESC LIMIT 10 OFFSET $page";
+            $sql = "SELECT * FROM posts as p LEFT JOIN post_resources as pr ON p.post_id=pr.post_id AND p.owner_id=pr.post_owner_id JOIN users as u ON p.owner_id=u.id ORDER BY p.post_id DESC LIMIT 10 OFFSET $page";
             $count = "SELECT COUNT(*) as count FROM posts as p JOIN post_resources as pr ON p.post_id=pr.post_id AND p.owner_id=pr.post_owner_id JOIN users as u ON p.owner_id=u.id ";
             $result = $db->query($sql);
             $result2 = $db->query($count);

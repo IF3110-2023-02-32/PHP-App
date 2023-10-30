@@ -9,6 +9,7 @@ define('PAGE_PATH', __DIR__ . '/app/view');
 require_once "app/config/config.php";
 require_once SRC_ROOT_PATH . "/app/router/Router.php";
 require_once CONTROLLER_PATH . "/User/LoginController.php";
+require_once CONTROLLER_PATH . "/User/LogoutController.php";
 require_once CONTROLLER_PATH . "/User/RegisterController.php";
 require_once CONTROLLER_PATH . "/Admin/AdminController.php";
 require_once CONTROLLER_PATH . "/Admin/BanController.php";
@@ -35,6 +36,7 @@ $router = new Router();
 
 // $router->addHandler("/example", BaseController::getInstance(), [BaseMiddleware::getInstance()]);
 $router->addHandler("/api/login", LoginController::getInstance(), []);
+$router->addHandler("/api/logout", LogoutController::getInstance(), []);
 $router->addHandler("/api/register", RegisterController::getInstance(), []);
 $router->addHandler("/api/admin", AdminController::getInstance(), []);
 $router->addHandler("/api/ban", BanController::getInstance(), []);

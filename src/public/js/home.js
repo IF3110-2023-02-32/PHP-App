@@ -18,7 +18,9 @@ function createPost(data,totalsemuapage,pagenow){
             fotoprofile.src = '/public/assets/kajuha.jpg';
         }
         else{
-            fotoprofile.src = element.profile_picture_path;
+            path = element.profile_picture_path;
+            path = path.replace("/var/www/html", '');
+            fotoprofile.src = path;
         }
 
         const identitas = document.createElement('div');
@@ -38,27 +40,29 @@ function createPost(data,totalsemuapage,pagenow){
         let type = gettype.split('.').pop();
         var pathToRemove = "/var/www/html";
         var path = element.path;
-        path = path.replace(pathToRemove, '');
-        console.log(path);
-        if(type=='jpg' || type=='jpeg' || type=='png'){
-            const isifoto = document.createElement('img');
-            isifoto.src = path;
-            isifoto.classList.add('foto');
-            box.appendChild(isifoto);
-        }
-        else if(type=='mp4'){
-            const isivideo = document.createElement('video');
-            isivideo.src = path;
-            isivideo.classList.add('video');
-            isivideo.controls = true;
-            box.appendChild(isivideo);
-        }
-        else if(type=='mp3'){
-            const isiaudio = document.createElement('audio');
-            isiaudio.src = path;
-            isiaudio.classList.add('audio');
-            isiaudio.controls = true;
-            box.appendChild(isiaudio);
+        if(path!=null){
+            path = path.replace(pathToRemove, '');
+            console.log(path);
+            if(type=='jpg' || type=='jpeg' || type=='png'){
+                const isifoto = document.createElement('img');
+                isifoto.src = path;
+                isifoto.classList.add('foto');
+                box.appendChild(isifoto);
+            }
+            else if(type=='mp4'){
+                const isivideo = document.createElement('video');
+                isivideo.src = path;
+                isivideo.classList.add('video');
+                isivideo.controls = true;
+                box.appendChild(isivideo);
+            }
+            else if(type=='mp3'){
+                const isiaudio = document.createElement('audio');
+                isiaudio.src = path;
+                isiaudio.classList.add('audio');
+                isiaudio.controls = true;
+                box.appendChild(isiaudio);
+            }
         }
         post.appendChild(box);
     });
