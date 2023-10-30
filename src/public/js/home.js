@@ -35,12 +35,11 @@ function createPost(data,totalsemuapage,pagenow){
         const isitext = document.createElement('p');
         isitext.textContent = element.body;
         box.appendChild(isitext);
-
-        let gettype = element.path
-        let type = gettype.split('.').pop();
         var pathToRemove = "/var/www/html";
         var path = element.path;
         if(path!=null){
+            let gettype = element.path
+            let type = gettype.split('.').pop();
             path = path.replace(pathToRemove, '');
             console.log(path);
             if(type=='jpg' || type=='jpeg' || type=='png'){
