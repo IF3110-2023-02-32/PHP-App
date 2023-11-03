@@ -14,9 +14,11 @@ require_once PAGE_PATH . "/templates/navbar.php";
 </head>
 
 <body>
+  <div class="layout">
     <?php
-    echo Navbar();
+      echo Navbar();
     ?>
+  </div>
     <script src="/public/js/home.js"></script>
 </body>
 </html>
