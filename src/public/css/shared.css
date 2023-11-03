@@ -23,7 +23,7 @@ body{
 
 .layout {
     display: grid;
-    grid-template-columns: 275px auto 150px;
+    grid-template-columns: 275px auto auto;
     /* margin: auto; */
     /* max-width: 2200px; */
 }

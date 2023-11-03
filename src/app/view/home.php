@@ -18,6 +18,8 @@ require_once PAGE_PATH . "/templates/navbar.php";
     <?php
       echo Navbar();
     ?>
+    <div id="list-post">
+    </div>
   </div>
     <script src="/public/js/home.js"></script>
 </body>

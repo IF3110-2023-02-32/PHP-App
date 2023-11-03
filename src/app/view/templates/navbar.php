@@ -35,8 +35,6 @@ function Navbar()
             </a>
         </div>
     </div>
-    <div id="list-post">
-    </div>
   EOT;
 
   return $html;
