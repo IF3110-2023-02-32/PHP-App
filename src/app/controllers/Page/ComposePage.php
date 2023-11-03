@@ -21,7 +21,7 @@ class ComposePage extends BaseController{
 
     protected function get($urlParams)
     {
-        require PAGE_PATH . "/post.php";
+        require PAGE_PATH . "/compose.php";
         exit();
     }
 }
