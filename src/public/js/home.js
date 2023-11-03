@@ -73,7 +73,7 @@ function createPost(data,totalsemuapage,pagenow){
     makePagination(totalsemuapage,pagenow);
 }
 const xhr = new XMLHttpRequest();
-const url = 'http://localhost:8008/api/getpost/0';
+const url = '/api/getpost/0';
 
 xhr.open('GET', url, true);
 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
@@ -154,7 +154,7 @@ function klikPagination(totalPages,page){
 function changePage(page){
     const xhr = new XMLHttpRequest();
     var getpage = (page-1);
-    const url = 'http://localhost:8008/api/getpost/'+getpage.toString();
+    const url = '/api/getpost/'+getpage.toString();
 
     xhr.open('GET', url, true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
