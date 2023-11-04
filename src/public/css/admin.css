@@ -162,6 +162,14 @@ body{
     cursor: pointer;
     border-radius: 10px;
 }
+.dropdowntempat #sort{
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
 .dropdowntempat{
     position: relative;
     width: 280px;
