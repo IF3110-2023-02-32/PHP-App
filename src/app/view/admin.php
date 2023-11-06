@@ -20,6 +20,12 @@
             <option value="name">Profile Name</option>
         </select>
     </div>
+    <div class="dropdowntempat">
+        <select id="sort" name="selectedOption">
+            <option value="naik">Menaik</option>
+            <option value="turun">Menurun</option>
+        </select>
+    </div>
     <div class="tmbltoban">
         <input type="text" class="inputnama" id="searchtext"placeholder="Search...">
     </div>

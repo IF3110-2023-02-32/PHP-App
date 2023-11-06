@@ -78,6 +78,7 @@ document.getElementById('tmbltobaned').addEventListener('click', function() {
 });
 const valuedropdown = document.querySelector('#dropdown');
 const search = document.querySelector('#searchtext');
+const valuesort = document.querySelector('#sort');
 document.getElementById('search').addEventListener('click', function() {
     if(valuedropdown.value==="username"){
         if(search.value===""){
@@ -96,6 +97,13 @@ document.getElementById('search').addEventListener('click', function() {
                     }
                     else if(response.status==="sukses"){
                         console.log(response);
+                        if(valuesort.value==="naik"){
+                            //id
+                            response.ban.sort(function(a, b){return a.id - b.id});
+                        }
+                        else if(valuesort.value==="turun"){
+                            response.ban.sort(function(a, b){return b.id - a.id});
+                        }
                         var hapus = document.querySelectorAll(".person");
                         hapus.forEach(function(e){
                             e.remove();
@@ -126,6 +134,13 @@ document.getElementById('search').addEventListener('click', function() {
                     }
                     else if(response.status==="sukses"){
                         // console.log(response);
+                        if(valuesort.value==="naik"){
+                            //id
+                            response.ban.sort(function(a, b){return a.id - b.id});
+                        }
+                        else if(valuesort.value==="turun"){
+                            response.ban.sort(function(a, b){return b.id - a.id});
+                        }
                         let ambil = [];
                         for(let i=0;i<response.ban.length;i++){
                             var regex = new RegExp(`.*${search.value}.*`);
@@ -171,6 +186,13 @@ document.getElementById('search').addEventListener('click', function() {
                     }
                     else if(response.status==="sukses"){
                         console.log(response);
+                        if(valuesort.value==="naik"){
+                            //id
+                            response.ban.sort(function(a, b){return a.id - b.id});
+                        }
+                        else if(valuesort.value==="turun"){
+                            response.ban.sort(function(a, b){return b.id - a.id});
+                        }
                         var hapus = document.querySelectorAll(".person");
                         hapus.forEach(function(e){
                             e.remove();
@@ -200,6 +222,13 @@ document.getElementById('search').addEventListener('click', function() {
                     }
                     else if(response.status==="sukses"){
                         // console.log(response);
+                        if(valuesort.value==="naik"){
+                            //id
+                            response.ban.sort(function(a, b){return a.id - b.id});
+                        }
+                        else if(valuesort.value==="turun"){
+                            response.ban.sort(function(a, b){return b.id - a.id});
+                        }
                         let ambil = [];
                         for(let i=0;i<response.ban.length;i++){
                             var regex = new RegExp(`.*${search.value}.*`);
