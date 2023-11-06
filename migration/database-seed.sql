@@ -43,6 +43,8 @@ CREATE TABLE "posts" (
   "refer_post" integer DEFAULT null,
   "refer_post_owner" integer DEFAULT null,
   "tags" varchar[] DEFAULT '{}',
+  "likes" integer DEFAULT 0,
+  "shares" integer DEFAULT 0,
   PRIMARY KEY ("post_id", "owner_id"),
 
   CONSTRAINT no_self_refer CHECK (refer_post <> post_id AND refer_post_owner <> owner_id)
@@ -157,6 +159,20 @@ CREATE TRIGGER validate_post_reference
   BEFORE INSERT OR UPDATE ON posts
   FOR EACH ROW
   EXECUTE FUNCTION validate_post_reference();
+
+CREATE FUNCTION increment_like() RETURNS TRIGGER AS $$
+  BEGIN
+    UPDATE posts
+    SET likes = likes + 1
+    WHERE owner_id = NEW.post_owner_id AND post_id = NEW.post_id;
+    RETURN NEW;
+  END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER increment_like
+  AFTER INSERT ON likes
+  FOR EACH ROW
+  EXECUTE FUNCTION increment_like();
 
 -- add basic roles
 INSERT INTO user_roles(role) VALUES('admin');
