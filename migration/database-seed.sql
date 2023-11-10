@@ -60,7 +60,8 @@ CREATE TABLE "post_resources" (
 CREATE TABLE "likes" (
   "post_id" integer,
   "post_owner_id" integer,
-  "user_id" integer
+  "user_id" integer,
+  "created_at" timestamp DEFAULT current_timestamp
 );
 
 COMMENT ON COLUMN "users"."id" IS 'Starts at 1';

@@ -54,7 +54,7 @@ class PostController extends BaseController
   protected function post($urlParams)
   {
     $this->compose();
-    require PAGE_PATH . "/submission.php";
+    header("Location: /");
     exit();
   }
 }
