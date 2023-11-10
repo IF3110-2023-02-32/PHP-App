@@ -27,6 +27,7 @@ function createPost(data,totalsemuapage,pagenow){
         identitas.classList.add('iden');
         identitas.appendChild(fotoprofile);
         identitas.appendChild(simpanidentitas);
+        identitas.addEventListener('click',function(){gotoProfile(element.id)});
 
         const box = document.createElement('div');
         box.classList.add('box');
@@ -34,6 +35,8 @@ function createPost(data,totalsemuapage,pagenow){
 
         const isitext = document.createElement('p');
         isitext.textContent = element.body;
+        isitext.classList.add('isitext');
+        isitext.addEventListener('click',function(){gotoPost(element.post_id,element.id)});
         box.appendChild(isitext);
         var pathToRemove = "/var/www/html";
         var path = element.path;
@@ -63,6 +66,16 @@ function createPost(data,totalsemuapage,pagenow){
                 box.appendChild(isiaudio);
             }
         }
+        const logolike = document.createElement('i');
+        logolike.classList.add('fas','fa-thumbs-up');
+        const like = document.createElement('button');
+        like.classList.add('like-button');
+        like.addEventListener('click',function(){likeId(element.post_id,element.id)});
+        like.appendChild(logolike);
+        const buatbutton = document.createElement('div');
+        buatbutton.classList.add('button-container');
+        buatbutton.appendChild(like);
+        box.appendChild(buatbutton);
         post.appendChild(box);
     });
     const list = document.createElement('ul');
@@ -71,6 +84,36 @@ function createPost(data,totalsemuapage,pagenow){
     pagination.appendChild(list);
     post.appendChild(pagination);
     makePagination(totalsemuapage,pagenow);
+}
+function gotoPost(postid,ownerid){
+    console.log(postid,"post");
+    window.location.href = "/post/"+ownerid+"/"+postid;
+}
+function gotoProfile(userid){
+    console.log(userid,"user");
+}
+function likeId(postid,userid){
+    console.log("like",postid);
+    const xhr = new XMLHttpRequest();
+    const url = '/api/like';
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if(response.status==="failed"){
+                alert("Failed to like post");
+            }
+            else if(response.status==="success"){
+                console.log(response);
+            }
+        } else {
+            console.error('Gagal melakukan permintaan');
+        }
+        }
+    };
+    xhr.send(`post_id=${encodeURIComponent(postid)}&owner=${encodeURIComponent(userid)}`);
 }
 const xhr = new XMLHttpRequest();
 const url = '/api/getpost/0';

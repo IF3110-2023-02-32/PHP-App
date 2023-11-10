@@ -17,6 +17,7 @@ require_once CONTROLLER_PATH . "/Admin/UnbanController.php";
 require_once CONTROLLER_PATH . "/Admin/SetAdmin.php";
 require_once CONTROLLER_PATH . "/Admin/DeleteUserController.php";
 require_once CONTROLLER_PATH . "/Home/GetPostController.php";
+require_once CONTROLLER_PATH . "/Home/LikeController.php";
 
 require_once CONTROLLER_PATH . "/Page/HomePage.php";
 require_once CONTROLLER_PATH . "/Page/LoginPage.php";
@@ -44,6 +45,8 @@ $router->addHandler("/api/unban", UnbanController::getInstance(), []);
 $router->addHandler("/api/setadmin", SetAdminController::getInstance(), []);
 $router->addHandler("/api/deleteuser", DeleteUserController::getInstance(), []);
 $router->addHandler("/api/getpost/*", GetPostController::getInstance(), []);
+$router->addHandler("/api/like", LikeController::getInstance(), []);
+
 
 $router->addHandler("/", HomePage::getInstance(), []);
 $router->addHandler("/login", LoginPage::getInstance(), []);
@@ -53,6 +56,6 @@ $router->addHandler("/*", UserPage::getInstance(), []);
 $router->addHandler("/settings/*", SettingsPage::getInstance(), [CheckLogin::getInstance()]);
 $router->addHandler("/admin/*", AdminPage::getInstance(), [CheckAdmin::getInstance()]);
 $router->addHandler("/admin/unban/*", AdminPageUnban::getInstance(), [CheckAdmin::getInstance()]);
-$router->addHandler("/*/status/*", PostPage::getInstance(), []);
+$router->addHandler("/post/*/*", PostPage::getInstance(), []);
 
 $router->run($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

@@ -35,20 +35,22 @@
     position: absolute;
     top: 10%;
     left: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .box {
     border: 2px solid #333;
     padding: 20px;
-    max-width: 100%;
+    max-width: 600px;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-    width: 500%;
+    width: 600px;
     word-wrap: break-word; 
     overflow: hidden;
     border-radius: 20px;
-
 }
 
 img {
@@ -72,6 +74,12 @@ img {
     overflow: hidden;
     max-width: 100%;
     border-bottom: 1px solid #333;
+}
+.iden:hover{
+    cursor: pointer;
+}
+.isitext:hover{
+    cursor: pointer;
 }
 .kolom{
     display: flex;
@@ -143,4 +151,43 @@ img {
 
     font-weight: 600;
     color: #fff;
+}
+.like-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.share-button {
+    padding: 10px 20px;
+    background-color: #3b5998;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.like-button:hover, .share-button:hover {
+    background-color: #0056b3;
+}
+
+.like-button:focus, .share-button:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.like-button, .share-button {
+    text-align: center;
+}
+
+.like-button i, .share-button i {
+    margin-right: 5px; 
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
 }
