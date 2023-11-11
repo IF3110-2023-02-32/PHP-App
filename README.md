@@ -32,17 +32,11 @@ Aplikasi web ini merupakan aplikasi web yang digunakan untuk memudahkan pengguna
 
 ### Pembagian Tugas
 
-| NIM      | Nama | Tugas yang dikerjakan | 
-| ----------- | ----------- | ----------- |
-| 13521098      | Fazel Ginanda       | Home dan Post (Client Side) |
-| 13521138   | Johann Christian Kandani      | Profile, Profile Management  (Server-Client Side), Base Classes, Config DB, Setup Docker |
-| 13521159   | Sulthan Dzaky Alfaro      | Login, Registrasi, Admin dan Home (Server-Client Side) |
 
 Server Side:
 - Home : Sulthan Dzaky Alfaro (13521159)
-- Post : Fazel Ginanda (13521098)
+- Post : Johann Christian Kandani (13521138)
 - Profile : Johann Christian Kandani (13521138)
-- Profile Management : Johann Christian Kandani (13521138)
 - Login : Sulthan Dzaky Alfaro (13521159)
 - Registrasi : Sulthan Dzaky Alfaro (13521159)
 - Admin : Sulthan Dzaky Alfaro (13521159)
@@ -51,10 +45,13 @@ Client Side:
 - Home : Fazel Ginanda (13521098), Sulthan Dzaky Alfaro (13521159)
 - Post : Fazel Ginanda (13521098)
 - Profile : Johann Christian Kandani (13521138)
-- Profile Management : Johann Christian Kandani (13521138)
 - Login : Sulthan Dzaky Alfaro (13521159)
 - Registrasi : Sulthan Dzaky Alfaro (13521159)
 - Admin : Sulthan Dzaky Alfaro (13521159)
+
+Tambahan:
+Fitur Reply : Sulthan Dzaky Alfaro (13521159)
+Like : Sulthan Dzaky Alfaro (13521159)
 
 
 
