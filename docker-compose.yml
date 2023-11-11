@@ -14,7 +14,7 @@ services:
   # Source: https://github.com/alexeagleson/docker-node-postgres-template/blob/master/docker-compose.yml
   postgres:
     container_name: ${POSTGRES_HOST}
-    image: postgres:alpine
+    image: postgres:16-alpine
     restart: always
     env_file:
       - .env
