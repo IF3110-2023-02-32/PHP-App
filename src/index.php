@@ -18,6 +18,10 @@ require_once CONTROLLER_PATH . "/Admin/SetAdmin.php";
 require_once CONTROLLER_PATH . "/Admin/DeleteUserController.php";
 require_once CONTROLLER_PATH . "/Home/GetPostController.php";
 require_once CONTROLLER_PATH . "/Home/LikeController.php";
+require_once CONTROLLER_PATH . "/Home/GetPostIDController.php";
+require_once CONTROLLER_PATH . "/Home/ReplyPostController.php";
+require_once CONTROLLER_PATH . "/Home/GetReplyPostController.php";
+require_once CONTROLLER_PATH . "/Home/ClickPostController.php";
 
 require_once CONTROLLER_PATH . "/Page/HomePage.php";
 require_once CONTROLLER_PATH . "/Page/LoginPage.php";
@@ -46,6 +50,10 @@ $router->addHandler("/api/setadmin", SetAdminController::getInstance(), []);
 $router->addHandler("/api/deleteuser", DeleteUserController::getInstance(), []);
 $router->addHandler("/api/getpost/*", GetPostController::getInstance(), []);
 $router->addHandler("/api/like", LikeController::getInstance(), []);
+$router->addHandler("/api/getpostid/*/*", GetPostIDController::getInstance(), []);
+$router->addHandler("/api/reply/*/*", ReplyPostController::getInstance(), []);
+$router->addHandler("/api/getreply/*/*", GetReplyPostController::getInstance(), []);
+$router->addHandler("/api/clickpost", ClickPostController::getInstance(), []);
 
 
 $router->addHandler("/", HomePage::getInstance(), []);

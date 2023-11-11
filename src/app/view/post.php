@@ -16,8 +16,15 @@ require_once PAGE_PATH . "/templates/navbar.php";
     <?php
       echo Navbar();
     ?>
-    <div id="test">
-        test
+    <div class="gridcontent">
+      <div id="content" class="box">
+      </div>
+      <div class="input-reply">
+          <input type="text" id="reply" placeholder="Reply" class="input-reply-text">
+          <button id="reply-button" class="reply-button">Reply</button>
+      </div>
+      <div id="list-reply">
+      </div>
     </div>
   </div>
     <script src="/public/js/post.js"></script>

@@ -45,6 +45,7 @@ CREATE TABLE "posts" (
   "tags" varchar[] DEFAULT '{}',
   "likes" integer DEFAULT 0,
   "shares" integer DEFAULT 0,
+  "views" integer DEFAULT 0,
   PRIMARY KEY ("post_id", "owner_id"),
 
   CONSTRAINT no_self_refer CHECK (refer_post <> post_id AND refer_post_owner <> owner_id)

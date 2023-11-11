@@ -75,6 +75,13 @@ img {
     max-width: 100%;
     border-bottom: 1px solid #333;
 }
+.iden-post{
+    display: flex;
+    word-wrap: break-word; 
+    overflow: hidden;
+    max-width: 100%;
+    border-bottom: 1px solid #333;
+}
 .iden:hover{
     cursor: pointer;
 }
@@ -190,4 +197,30 @@ img {
 .button-container {
     display: flex;
     align-items: center;
+}
+
+.input-reply{
+    margin-top: 20px;
+}
+.input-reply input{
+    padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      margin-right: 5px;
+      width: 570px;
+      height:50px;
+      box-sizing: border-box;
+}
+.input-reply button{
+    padding: 10px;
+    background-color: rgb(76, 83, 175);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    height: 50px;
+    width: 70px;
+}
+.input-reply button:hover{
+    background-color: #6545a0;
 }

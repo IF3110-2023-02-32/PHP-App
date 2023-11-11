@@ -87,6 +87,26 @@ function createPost(data,totalsemuapage,pagenow){
 }
 function gotoPost(postid,ownerid){
     console.log(postid,"post");
+    const xhr = new XMLHttpRequest();
+    const url = '/api/clickpost';
+    xhr.open('PUT', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if(response.status==="error"){
+                alert("Failed to go to post");
+            }
+            else if(response.status==="success"){
+                console.log(response);
+            }
+        } else {
+            console.error('Gagal melakukan permintaan');
+        }
+        }
+    };
+    xhr.send(`post_id=${encodeURIComponent(postid)}&owner_id=${encodeURIComponent(ownerid)}`);
     window.location.href = "/post/"+ownerid+"/"+postid;
 }
 function gotoProfile(userid){
@@ -103,7 +123,7 @@ function likeId(postid,userid){
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if(response.status==="failed"){
-                alert("Failed to like post");
+                alert("Already like post");
             }
             else if(response.status==="success"){
                 console.log(response);
