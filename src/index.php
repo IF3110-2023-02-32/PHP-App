@@ -22,6 +22,10 @@ require_once CONTROLLER_PATH . "/Home/GetPostIDController.php";
 require_once CONTROLLER_PATH . "/Home/ReplyPostController.php";
 require_once CONTROLLER_PATH . "/Home/GetReplyPostController.php";
 require_once CONTROLLER_PATH . "/Home/ClickPostController.php";
+require_once CONTROLLER_PATH . "/Home/ProfileController.php";
+require_once CONTROLLER_PATH . "/Home/ProfileUserController.php";
+require_once CONTROLLER_PATH . "/Home/FollowController.php";
+require_once CONTROLLER_PATH . "/Home/UnfollowController.php";
 
 require_once CONTROLLER_PATH . "/Page/HomePage.php";
 require_once CONTROLLER_PATH . "/Page/LoginPage.php";
@@ -32,6 +36,8 @@ require_once CONTROLLER_PATH . "/Page/UserPage.php";
 require_once CONTROLLER_PATH . "/Page/HomePage.php";
 require_once CONTROLLER_PATH . "/Page/PostPage.php";
 require_once CONTROLLER_PATH . "/Page/AdminPageUnban.php";
+require_once CONTROLLER_PATH . "/Page/ProfilePage.php";
+
 
 require_once MIDDLEWARE_PATH . "/CheckAdmin.php";
 require_once MIDDLEWARE_PATH . "/CheckLogin.php";
@@ -54,16 +60,24 @@ $router->addHandler("/api/getpostid/*/*", GetPostIDController::getInstance(), []
 $router->addHandler("/api/reply/*/*", ReplyPostController::getInstance(), []);
 $router->addHandler("/api/getreply/*/*", GetReplyPostController::getInstance(), []);
 $router->addHandler("/api/clickpost", ClickPostController::getInstance(), []);
+$router->addHandler("/api/profile", ProfileController::getInstance(), []);
+$router->addHandler("/api/profileuser/*", ProfileUserController::getInstance(), []);
+$router->addHandler("/api/follow", FollowController::getInstance(), []);
+$router->addHandler("/api/unfollow", UnfollowController::getInstance(), []);
 
 
 $router->addHandler("/", HomePage::getInstance(), []);
 $router->addHandler("/login", LoginPage::getInstance(), []);
 $router->addHandler("/compose/kicau", ComposePage::getInstance(), [CheckLogin::getInstance()]);
 $router->addHandler("/compose/create", PostController::getInstance(), [CheckLogin::getInstance()]);
-$router->addHandler("/*", UserPage::getInstance(), []);
+// $router->addHandler("/*", UserPage::getInstance(), []);
 $router->addHandler("/settings/*", SettingsPage::getInstance(), [CheckLogin::getInstance()]);
 $router->addHandler("/admin/*", AdminPage::getInstance(), [CheckAdmin::getInstance()]);
 $router->addHandler("/admin/unban/*", AdminPageUnban::getInstance(), [CheckAdmin::getInstance()]);
 $router->addHandler("/post/*/*", PostPage::getInstance(), []);
+$router->addHandler("/profiles", ProfilePage::getInstance(), []);
+$router->addHandler("/profiles/*", ProfilePage::getInstance(), []);
+
+
 
 $router->run($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

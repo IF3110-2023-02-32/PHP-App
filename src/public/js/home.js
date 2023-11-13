@@ -111,6 +111,7 @@ function gotoPost(postid,ownerid){
 }
 function gotoProfile(userid){
     console.log(userid,"user");
+    window.location.href = "/profiles/"+userid;
 }
 function likeId(postid,userid){
     console.log("like",postid);
@@ -127,6 +128,7 @@ function likeId(postid,userid){
             }
             else if(response.status==="success"){
                 console.log(response);
+                alert("Like post success");
             }
         } else {
             console.error('Gagal melakukan permintaan');

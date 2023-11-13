@@ -26,7 +26,8 @@ function makePostID(element){
     }
 
     const identitas = document.createElement('div');
-    identitas.classList.add('iden-post');
+    identitas.classList.add('iden');
+    identitas.addEventListener('click',function(){window.location.href = '/profiles/'+ownerid});
     identitas.appendChild(fotoprofile);
     identitas.appendChild(simpanidentitas);
     box.appendChild(identitas);
@@ -90,7 +91,8 @@ function makeReply(element){
     }
 
     const identitas = document.createElement('div');
-    identitas.classList.add('iden-post');
+    identitas.classList.add('iden');
+    identitas.addEventListener('click',function(){window.location.href = '/profiles/'+element.id});
     identitas.appendChild(fotoprofile);
     identitas.appendChild(simpanidentitas);
     box.appendChild(identitas);

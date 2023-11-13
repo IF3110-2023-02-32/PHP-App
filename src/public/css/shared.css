@@ -90,3 +90,17 @@ body{
     justify-content: center;
     align-items: center;
 }
+.sidebar-menu__compose_logout {
+    margin-top: 10px;
+    display: flex;
+    padding: 15px;
+    border-radius: 30px;
+    background: #FF0000;
+
+    font-size: 19px;
+    font-weight: 700;
+    color: #ffffff;
+    
+    justify-content: center;
+    align-items: center;
+}
