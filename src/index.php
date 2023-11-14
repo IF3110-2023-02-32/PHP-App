@@ -11,6 +11,7 @@ require_once SRC_ROOT_PATH . "/app/router/Router.php";
 require_once CONTROLLER_PATH . "/User/LoginController.php";
 require_once CONTROLLER_PATH . "/User/LogoutController.php";
 require_once CONTROLLER_PATH . "/User/RegisterController.php";
+require_once CONTROLLER_PATH . "/User/GetAllUserController.php";
 require_once CONTROLLER_PATH . "/Admin/AdminController.php";
 require_once CONTROLLER_PATH . "/Admin/BanController.php";
 require_once CONTROLLER_PATH . "/Admin/UnbanController.php";
@@ -64,13 +65,14 @@ $router->addHandler("/api/profile", ProfileController::getInstance(), []);
 $router->addHandler("/api/profileuser/*", ProfileUserController::getInstance(), []);
 $router->addHandler("/api/follow", FollowController::getInstance(), []);
 $router->addHandler("/api/unfollow", UnfollowController::getInstance(), []);
+$router->addHandler("/api/getalluser", GetAllUserController::getInstance(), []);
 
 
 $router->addHandler("/", HomePage::getInstance(), []);
 $router->addHandler("/login", LoginPage::getInstance(), []);
 $router->addHandler("/compose/kicau", ComposePage::getInstance(), [CheckLogin::getInstance()]);
 $router->addHandler("/compose/create", PostController::getInstance(), [CheckLogin::getInstance()]);
-// $router->addHandler("/*", UserPage::getInstance(), []);
+$router->addHandler("/user", UserPage::getInstance(), []);
 $router->addHandler("/settings/*", SettingsPage::getInstance(), [CheckLogin::getInstance()]);
 $router->addHandler("/admin/*", AdminPage::getInstance(), [CheckAdmin::getInstance()]);
 $router->addHandler("/admin/unban/*", AdminPageUnban::getInstance(), [CheckAdmin::getInstance()]);

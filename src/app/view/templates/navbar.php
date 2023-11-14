@@ -16,10 +16,10 @@ function Navbar()
                     Home
                 </div>
             </a>
-            <a href="#">
-                <div class="sidebar-menu__item">
+            <a href="/user">
+                <div class="sidebar-menu__item sidebar-menu__item--active">
                     <img src="/public/assets/followed.jpg" class="sidebar-menu__item-icon" />
-                    Followed
+                    User
                 </div>
             </a>
             <a href="/profiles">

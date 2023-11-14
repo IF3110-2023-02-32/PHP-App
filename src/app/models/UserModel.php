@@ -28,11 +28,17 @@ class UserModel
 
     public function getAllUser(){
         try{
+            $user = $_SESSION['user_id'];
             $db = PDOHandler::getInstance()->getPDO();
-            $sql = "SELECT * FROM users";
+            $sql = "SELECT * FROM users WHERE id != $user AND role='user' ORDER BY id";
             $result = $db->query($sql);
-            $hasil = $result->fetchAll(PDO::FETCH_ASSOC);
-            return $hasil;
+            if($result){
+                $hasil = $result->fetchAll(PDO::FETCH_ASSOC);
+                return $hasil;
+            }
+            else{
+                return null;
+            }
         }catch(Exception $e){
             return null;
         }
