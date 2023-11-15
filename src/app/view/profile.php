@@ -33,7 +33,7 @@ require_once PAGE_PATH . "/templates/navbar.php";
       </div>
     </div>
   </div>
+    <script src="/public/js/post.js"></script>
     <script src="/public/js/profile.js"></script>
-    <script src="/public/js/home.js"></script>
 </body>
 </html>

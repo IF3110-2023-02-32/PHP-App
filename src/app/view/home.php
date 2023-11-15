@@ -21,6 +21,7 @@ require_once PAGE_PATH . "/templates/navbar.php";
     <div id="list-post">
     </div>
   </div>
+    <script src="/public/js/post.js"></script>
     <script src="/public/js/home.js"></script>
 </body>
 </html>

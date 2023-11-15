@@ -18,6 +18,10 @@ if(splitUrl[splitUrl.length-1] == "profiles"){
             else{
                 namaprofile.textContent = response.data.profile_name;
                 username.textContent = "@"+response.data.username;
+                
+                // show posts of the user to the page
+                const profile_id = response.data.id;
+                showposts(profile_id);
             }
         } else {
             console.error('Gagal melakukan permintaan');
@@ -47,6 +51,10 @@ else{
                 });
                 const box = document.getElementById('box');
                 box.appendChild(buttonfollow);
+                
+                // show posts of the user to the page
+                const profile_id = id;
+                showposts(profile_id);
             }
             else if(response.status==="success"){
                 namaprofile.textContent = response.data.profile_name;
@@ -59,6 +67,10 @@ else{
                 });
                 const box = document.getElementById('box');
                 box.appendChild(buttonfollow);
+                
+                // show posts of the user to the page
+                const profile_id = id;
+                showposts(profile_id);
             }
             else if(response.status==="success3"){
                 window.location.href = '/profiles';
