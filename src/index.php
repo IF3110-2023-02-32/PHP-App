@@ -12,6 +12,9 @@ require_once CONTROLLER_PATH . "/User/LoginController.php";
 require_once CONTROLLER_PATH . "/User/LogoutController.php";
 require_once CONTROLLER_PATH . "/User/RegisterController.php";
 require_once CONTROLLER_PATH . "/User/GetAllUserController.php";
+require_once CONTROLLER_PATH . "/User/GetFollowsController.php";
+require_once CONTROLLER_PATH . "/User/GetDataPostController.php";
+require_once CONTROLLER_PATH . "/User/GetDataPostIDController.php";
 require_once CONTROLLER_PATH . "/Admin/AdminController.php";
 require_once CONTROLLER_PATH . "/Admin/BanController.php";
 require_once CONTROLLER_PATH . "/Admin/UnbanController.php";
@@ -66,6 +69,9 @@ $router->addHandler("/api/profileuser/*", ProfileUserController::getInstance(), 
 $router->addHandler("/api/follow", FollowController::getInstance(), []);
 $router->addHandler("/api/unfollow", UnfollowController::getInstance(), []);
 $router->addHandler("/api/getalluser", GetAllUserController::getInstance(), []);
+$router->addHandler("/api/getdatafollows/*", GetFollowsController::getInstance(), []);
+$router->addHandler("/api/getdatapost/*", GetDataPostController::getInstance(), []);
+$router->addHandler("/api/getdatapostid/*/*", GetDataPostIDController::getInstance(), []);
 
 
 $router->addHandler("/", HomePage::getInstance(), []);
