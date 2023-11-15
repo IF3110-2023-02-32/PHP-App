@@ -13,6 +13,9 @@ class ProfilePage extends BaseController{
         return self::$instance;
     }
     public function get($urlParams){
+        if(!isset($_SESSION['user_id'])) {
+            header("Location: /login");
+        }
         require PAGE_PATH . "/profile.php";
         exit();
     }

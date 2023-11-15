@@ -1,5 +1,30 @@
+const xhr = new XMLHttpRequest();
+const url = '/api/getpost/0';
 
-function createPost(data,totalsemuapage,pagenow){
+xhr.open('GET', url, true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+    if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText);
+        if(response.status==="error"){
+            alert(response.message);
+        }
+        else if(response.status==="sukses"){
+            console.log(response);
+            var totalpost = response.data.count;
+            var totalPage = Math.ceil(totalpost/10);
+            createPost(response.data.data,totalPage,1);
+        }
+    } else {
+        console.error('Gagal melakukan permintaan');
+    }
+    }
+};
+xhr.send();
+
+function createPost(data,totalsemuapage,pagenow,owner_id=null){
     const post = document.getElementById('list-post');
     data.forEach(element => {
         const username =  document.createElement('p');
@@ -137,32 +162,8 @@ function likeId(postid,userid){
     };
     xhr.send(`post_id=${encodeURIComponent(postid)}&owner=${encodeURIComponent(userid)}`);
 }
-const xhr = new XMLHttpRequest();
-const url = '/api/getpost/0';
 
-xhr.open('GET', url, true);
-xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-    if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        if(response.status==="error"){
-            alert(response.message);
-        }
-        else if(response.status==="sukses"){
-            console.log(response);
-            var totalpost = response.data.count;
-            var totalPage = Math.ceil(totalpost/10);
-            createPost(response.data.data,totalPage,1);
-        }
-    } else {
-        console.error('Gagal melakukan permintaan');
-    }
-    }
-};
-xhr.send();
-function makePagination(totalPages,page){
+function makePagination(totalPages,page,owner_id=null){
     console.log(page);
     const ulTag = document.querySelector('ul');
     let liTag = '';
@@ -216,10 +217,11 @@ function klikPagination(totalPages,page){
     changePage(page);
 }
 
-function changePage(page){
+function changePage(page,owner_id=null){
     const xhr = new XMLHttpRequest();
     var getpage = (page-1);
-    const url = '/api/getpost/'+getpage.toString();
+    var url = '/api/getpost/'+getpage.toString();
+    if(owner_id !== null) url.concat("?", owner_id)
 
     xhr.open('GET', url, true);
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

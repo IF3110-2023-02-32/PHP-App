@@ -15,12 +15,19 @@ class HomeModel
         }
         return self::$instance;
     }
-    public function getPostPage($page){
+    public function getPostPage($page, $ownerId=null){
         try{
+            if(!is_null($ownerId)){
+                $and_owner_id = " AND p.owner_id=$ownerId ";
+            }
+            else {
+                $and_owner_id = "";
+            }
+
             $db = PDOHandler::getInstance()->getPDO();
             $page = $page * 10;
-            $sql = "SELECT p.post_id,u.id,u.username,u.profile_name,u.profile_picture_path,p.body,pr.path FROM posts as p LEFT JOIN post_resources as pr ON p.post_id=pr.post_id AND p.owner_id=pr.post_owner_id JOIN users as u ON p.owner_id=u.id WHERE p.refer_type IS NULL ORDER BY p.created_at DESC LIMIT 10 OFFSET $page";
-            $count = "SELECT COUNT(*) as count FROM posts as p LEFT JOIN post_resources as pr ON p.post_id=pr.post_id AND p.owner_id=pr.post_owner_id JOIN users as u ON p.owner_id=u.id WHERE p.refer_type IS NULL";
+            $sql = "SELECT p.post_id,u.id,u.username,u.profile_name,u.profile_picture_path,p.body,pr.path FROM posts as p LEFT JOIN post_resources as pr ON p.post_id=pr.post_id AND p.owner_id=pr.post_owner_id JOIN users as u ON p.owner_id=u.id WHERE p.refer_type IS NULL $and_owner_id ORDER BY p.created_at DESC LIMIT 10 OFFSET $page";
+            $count = "SELECT COUNT(*) as count FROM posts as p LEFT JOIN post_resources as pr ON p.post_id=pr.post_id AND p.owner_id=pr.post_owner_id JOIN users as u ON p.owner_id=u.id WHERE p.refer_type IS NULL $and_owner_id";
             $result = $db->query($sql);
             $result2 = $db->query($count);
             if($result){

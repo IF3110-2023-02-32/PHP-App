@@ -15,7 +15,6 @@ services:
   php-postgres:
     image: postgres:16-alpine
     container_name: ${MONOLITHIC_POSTGRES_HOST}
-    restart: always
     environment:
       POSTGRES_USER: ${MONOLITHIC_POSTGRES_USER}
       POSTGRES_PASSWORD: ${MONOLITHIC_POSTGRES_PASSWORD}
