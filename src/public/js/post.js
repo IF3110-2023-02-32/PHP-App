@@ -1,212 +1,263 @@
-let currUrl = window.location.href;
-currUrl = currUrl.split('/');
-postid = currUrl[currUrl.length-1];
-ownerid = currUrl[currUrl.length-2];
-function makePostID(element){
-    const box = document.getElementById('content');
-    const username =  document.createElement('p');
-    username.textContent = "@"+element.username;
-    const nama =  document.createElement('p');
-    nama.textContent = element.profile_name;
-
-    const simpanidentitas = document.createElement('div');
-    simpanidentitas.classList.add('kolom');
-    simpanidentitas.appendChild(nama);
-    simpanidentitas.appendChild(username);
-
-    const fotoprofile = document.createElement('img');
-    fotoprofile.classList.add('fotoprofil');
-    if(element.profile_picture_path==null){
-        fotoprofile.src = '/public/assets/kajuha.jpg';
-    }
-    else{
-        path = element.profile_picture_path;
-        path = path.replace("/var/www/html", '');
-        fotoprofile.src = path;
+function showposts(owner_id=null) {
+    const xhr = new XMLHttpRequest();
+    let url = '/api/getpost/0';
+    if(owner_id !== null) {
+        url = url.concat("?owner_id=", owner_id);
     }
 
-    const identitas = document.createElement('div');
-    identitas.classList.add('iden');
-    identitas.addEventListener('click',function(){window.location.href = '/profiles/'+ownerid});
-    identitas.appendChild(fotoprofile);
-    identitas.appendChild(simpanidentitas);
-    box.appendChild(identitas);
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    const isitext = document.createElement('p');
-    isitext.textContent = element.body;
-    isitext.classList.add('isitext-post');
-    box.appendChild(isitext);
-    var pathToRemove = "/var/www/html";
-    var path = element.path;
-    if(path!=null){
-        let gettype = element.path
-        let type = gettype.split('.').pop();
-        path = path.replace(pathToRemove, '');
-        console.log(path);
-        if(type=='jpg' || type=='jpeg' || type=='png'){
-            const isifoto = document.createElement('img');
-            isifoto.src = path;
-            isifoto.classList.add('foto');
-            box.appendChild(isifoto);
-        }
-        else if(type=='mp4'){
-            const isivideo = document.createElement('video');
-            isivideo.src = path;
-            isivideo.classList.add('video');
-            isivideo.controls = true;
-            box.appendChild(isivideo);
-        }
-        else if(type=='mp3'){
-            const isiaudio = document.createElement('audio');
-            isiaudio.src = path;
-            isiaudio.classList.add('audio');
-            isiaudio.controls = true;
-            box.appendChild(isiaudio);
-        }
-    }
-}
-function makeReply(element){
-    const box = document.createElement('div');
-    box.classList.add('box');
-
-    const username =  document.createElement('p');
-    username.textContent = "@"+element.username;
-    const nama =  document.createElement('p');
-    nama.textContent = element.profile_name;
-
-    const simpanidentitas = document.createElement('div');
-    simpanidentitas.classList.add('kolom');
-    simpanidentitas.appendChild(nama);
-    simpanidentitas.appendChild(username);
-
-    const fotoprofile = document.createElement('img');
-    fotoprofile.classList.add('fotoprofil');
-    if(element.profile_picture_path==null){
-        fotoprofile.src = '/public/assets/kajuha.jpg';
-    }
-    else{
-        path = element.profile_picture_path;
-        path = path.replace("/var/www/html", '');
-        fotoprofile.src = path;
-    }
-
-    const identitas = document.createElement('div');
-    identitas.classList.add('iden');
-    identitas.addEventListener('click',function(){window.location.href = '/profiles/'+element.id});
-    identitas.appendChild(fotoprofile);
-    identitas.appendChild(simpanidentitas);
-    box.appendChild(identitas);
-
-    const isitext = document.createElement('p');
-    isitext.textContent = element.body;
-    isitext.classList.add('isitext-post');
-    box.appendChild(isitext);
-    var pathToRemove = "/var/www/html";
-    var path = element.path;
-    if(path!=null){
-        let gettype = element.path
-        let type = gettype.split('.').pop();
-        path = path.replace(pathToRemove, '');
-        console.log(path);
-        if(type=='jpg' || type=='jpeg' || type=='png'){
-            const isifoto = document.createElement('img');
-            isifoto.src = path;
-            isifoto.classList.add('foto');
-            box.appendChild(isifoto);
-        }
-        else if(type=='mp4'){
-            const isivideo = document.createElement('video');
-            isivideo.src = path;
-            isivideo.classList.add('video');
-            isivideo.controls = true;
-            box.appendChild(isivideo);
-        }
-        else if(type=='mp3'){
-            const isiaudio = document.createElement('audio');
-            isiaudio.src = path;
-            isiaudio.classList.add('audio');
-            isiaudio.controls = true;
-            box.appendChild(isiaudio);
-        }
-    }
-    const listreply = document.getElementById('list-reply');
-    listreply.appendChild(box);
-}
-
-const xhr = new XMLHttpRequest();
-const url = '/api/getpostid/'+ownerid+'/'+postid;
-xhr.open('GET',url,true);
-xhr.setRequestHeader('Content-Type','application/json');
-xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4) {
-    if (xhr.status === 200) {
-        const response = JSON.parse(xhr.responseText);
-        if(response.status==="error"){
-            alert(response.message);
-        }
-        // console.log(response);
-        makePostID(response);
-    } else {
-        console.error('Gagal melakukan permintaan');
-    }
-    }
-};
-xhr.send();
-
-const inputreply = document.getElementById('reply');
-const buttonreply = document.getElementById('reply-button');
-buttonreply.addEventListener('click',function(){
-    const valuereply = inputreply.value;
-    let regex = /^\s/;
-    if(valuereply==="" || regex.test(valuereply)){
-        alert("Reply tidak boleh kosong atau hanya spasi");
-    }
-    else if(valuereply!==""){
-        let url = '/api/reply/'+ownerid+'/'+postid;
-        console.log(valuereply);
-        let xhr = new XMLHttpRequest();
-        xhr.open('POST',url,true);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 const response = JSON.parse(xhr.responseText);
-                if(response.status==="failed"){
+                if(response.status==="error"){
                     alert(response.message);
                 }
-                else{
-                    window.location.reload();
+                else if(response.status==="sukses"){
+                    console.log(response);
+                    var totalpost = response.data.count;
+                    var totalPage = Math.ceil(totalpost/10);
+                    createPost(response.data.data,totalPage,1);
                 }
             } else {
                 console.error('Gagal melakukan permintaan');
             }
-            }
-        };
-        xhr.send(`body=${encodeURIComponent(valuereply)}`);
-    }
-});
+        }
+    };
+    xhr.send();
+}
 
-const xhr2 = new XMLHttpRequest();
-const url2 = '/api/getreply/'+ownerid+'/'+postid;
-xhr2.open('GET',url2,true);
-xhr2.setRequestHeader('Content-Type','application/json');
-xhr2.onreadystatechange = function () {
-    if (xhr2.readyState === 4) {
-    if (xhr2.status === 200) {
-        const response = JSON.parse(xhr2.responseText);
-        console.log(response);
-        if(response.status==="error"){
-            alert(response.message);
+function createPost(data,totalsemuapage,pagenow,owner_id=null){
+    const post = document.getElementById('list-post');
+    data.forEach(element => {
+        const username =  document.createElement('p');
+        username.textContent = "@"+element.username;
+        const nama =  document.createElement('p');
+        nama.textContent = element.profile_name;
+
+        const simpanidentitas = document.createElement('div');
+        simpanidentitas.classList.add('kolom');
+        simpanidentitas.appendChild(nama);
+        simpanidentitas.appendChild(username);
+
+        const fotoprofile = document.createElement('img');
+        fotoprofile.classList.add('fotoprofil');
+        if(element.profile_picture_path==null){
+            fotoprofile.src = '/public/assets/kajuha.jpg';
         }
-        // console.log(response);
-        if(response.status!=="kosong"){
-            response.forEach(element => {
-                makeReply(element);
-            });
+        else{
+            path = element.profile_picture_path;
+            path = path.replace("/var/www/html", '');
+            fotoprofile.src = path;
         }
-    } else {
-        console.error('Gagal melakukan permintaan');
+
+        const identitas = document.createElement('div');
+        identitas.classList.add('iden');
+        identitas.appendChild(fotoprofile);
+        identitas.appendChild(simpanidentitas);
+        identitas.addEventListener('click',function(){gotoProfile(element.id)});
+
+        const box = document.createElement('div');
+        box.classList.add('box');
+        box.appendChild(identitas);
+
+        const isitext = document.createElement('p');
+        isitext.textContent = element.body;
+        isitext.classList.add('isitext');
+        isitext.addEventListener('click',function(){gotoPost(element.post_id,element.id)});
+        box.appendChild(isitext);
+        var pathToRemove = "/var/www/html";
+        var path = element.path;
+        if(path!=null){
+            let gettype = element.path
+            let type = gettype.split('.').pop();
+            path = path.replace(pathToRemove, '');
+            // console.log(path);
+            if(type=='jpg' || type=='jpeg' || type=='png'){
+                const isifoto = document.createElement('img');
+                isifoto.src = path;
+                isifoto.classList.add('foto');
+                box.appendChild(isifoto);
+            }
+            else if(type=='mp4'){
+                const isivideo = document.createElement('video');
+                isivideo.src = path;
+                isivideo.classList.add('video');
+                isivideo.controls = true;
+                box.appendChild(isivideo);
+            }
+            else if(type=='mp3'){
+                const isiaudio = document.createElement('audio');
+                isiaudio.src = path;
+                isiaudio.classList.add('audio');
+                isiaudio.controls = true;
+                box.appendChild(isiaudio);
+            }
+        }
+        const logolike = document.createElement('i');
+        logolike.classList.add('fas','fa-thumbs-up');
+        const like = document.createElement('button');
+        like.classList.add('like-button');
+        like.addEventListener('click',function(){likeId(element.post_id,element.id)});
+        like.appendChild(logolike);
+        const buatbutton = document.createElement('div');
+        buatbutton.classList.add('button-container');
+        buatbutton.appendChild(like);
+        box.appendChild(buatbutton);
+        post.appendChild(box);
+    });
+    const list = document.createElement('ul');
+    const pagination = document.createElement('div');
+    pagination.classList.add('pagination');
+    pagination.appendChild(list);
+    post.appendChild(pagination);
+    makePagination(totalsemuapage,pagenow);
+}
+function gotoPost(postid,ownerid){
+    console.log(postid,"post");
+    const xhr = new XMLHttpRequest();
+    const url = '/api/clickpost';
+    xhr.open('PUT', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if(response.status==="error"){
+                alert("Failed to go to post");
+            }
+            else if(response.status==="success"){
+                console.log(response);
+            }
+        } else {
+            console.error('Gagal melakukan permintaan');
+        }
+        }
+    };
+    xhr.send(`post_id=${encodeURIComponent(postid)}&owner_id=${encodeURIComponent(ownerid)}`);
+    window.location.href = "/post/"+ownerid+"/"+postid;
+}
+function gotoProfile(userid){
+    console.log(userid,"user");
+    window.location.href = "/profiles/"+userid;
+}
+function likeId(postid,userid){
+    console.log("like",postid);
+    const xhr = new XMLHttpRequest();
+    const url = '/api/like';
+    xhr.open('POST', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if(response.status==="failed"){
+                alert("Already like post");
+            }
+            else if(response.status==="success"){
+                console.log(response);
+                alert("Like post success");
+            }
+        } else {
+            console.error('Gagal melakukan permintaan');
+        }
+        }
+    };
+    xhr.send(`post_id=${encodeURIComponent(postid)}&owner=${encodeURIComponent(userid)}`);
+}
+
+function makePagination(totalPages,page,owner_id=null){
+    console.log(page);
+    const ulTag = document.querySelector('ul');
+    let liTag = '';
+    if(totalPages===0){
+        liTag+=`<p class="kosong">Belum ada post</p>`
     }
+    else{
+        let activeLi;
+        let beforePage = page - 1;
+        let afterPage = page + 1;
+        if(page>1){
+            liTag += `<li class="btn prev" onclick="klikPagination(${totalPages},${page-1})"><span><i class="fas fa-angle-left"></i>< Prev</span></li>`;
+        }
+        if(page>2){
+            liTag+=`<li class="numb" onclick="klikPagination(${totalPages},1)"><span>1</span></li>`
+            if(page>3){
+                liTag+=`<li class="dots"><span>...</span></li>`
+            }
+        }
+        for (let i=beforePage;i<=afterPage;i++){
+            if(i>totalPages){
+                continue;
+            }
+            if(i==0){
+                i=1
+            }
+
+            if(page==i){
+                activeLi = "active";
+            }
+            else{
+                activeLi = "";
+            }
+            liTag+=`<li class="numb ${activeLi}" onclick="klikPagination(${totalPages},${i})"><span>${i}</span></li>`
+        }
+        if(page<totalPages-1){
+            if(page<totalPages-2){
+                liTag+=`<li class="dots"><span>...</span></li>`
+            }
+            liTag+=`<li class="numb" onclick="klikPagination(${totalPages},${totalPages})"><span>${totalPages}</span></li>`
+        }
+        if(page < totalPages){
+            liTag += `<li class="btn next" onclick="klikPagination(${totalPages},${page+1})"><span>Next ><i class="fas fa-angle-right"></i></span></li>`;
+        }
     }
-};
-xhr2.send();
+    ulTag.innerHTML = liTag;
+}
+
+function klikPagination(totalPages,page){
+    makePagination(totalPages,page);
+    changePage(page);
+}
+
+function changePage(page,owner_id=null){
+    const xhr = new XMLHttpRequest();
+    var getpage = (page-1);
+    var url = '/api/getpost/'+getpage.toString();
+    if(owner_id !== null) {
+        url = url.concat("?owner_id=", owner_id);
+    }
+
+    xhr.open('GET', url, true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+            if(response.status==="error"){
+                alert(response.message);
+            }
+            else if(response.status==="sukses"){
+                console.log(response);
+                const box = document.querySelectorAll('.box');
+                box.forEach(function(e){
+                    e.remove();
+                });
+                const pagination = document.querySelectorAll('.pagination');
+                pagination.forEach(function(e){
+                    e.remove();
+                });
+                var totalpost = response.data.count;
+                var totalPage = Math.ceil(totalpost/10);
+                createPost(response.data.data,totalPage,page);
+            }
+        } else {
+            console.error('Gagal melakukan permintaan');
+        }
+        }
+    };
+    xhr.send();
+}

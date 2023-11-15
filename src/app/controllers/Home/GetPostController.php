@@ -12,7 +12,13 @@ class GetPostController extends BaseController{
     }
     public function get($urlParams){
         $page = $urlParams[0];
-        $data = $this->srv->getPostPage($page);
+        if(array_key_exists('owner_id', $_GET)) {
+            $ownerId = $_GET['owner_id'];
+        }
+        else {
+            $ownerId = null;
+        }
+        $data = $this->srv->getPostPage($page, $ownerId);
         if($data!=null){
             $hasiljson = array(
                 'status' => 'sukses',

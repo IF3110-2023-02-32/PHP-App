@@ -27,6 +27,6 @@ require_once PAGE_PATH . "/templates/navbar.php";
       </div>
     </div>
   </div>
-    <script src="/public/js/post.js"></script>
+    <script src="/public/js/reply.js"></script>
 </body>
 </html>
