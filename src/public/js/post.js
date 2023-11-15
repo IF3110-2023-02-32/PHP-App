@@ -19,7 +19,7 @@ function showposts(owner_id=null) {
                     console.log(response);
                     var totalpost = response.data.count;
                     var totalPage = Math.ceil(totalpost/10);
-                    createPost(response.data.data,totalPage,1);
+                    createPost(response.data.data,totalPage,1,owner_id);
                 }
             } else {
                 console.error('Gagal melakukan permintaan');
@@ -113,7 +113,7 @@ function createPost(data,totalsemuapage,pagenow,owner_id=null){
     pagination.classList.add('pagination');
     pagination.appendChild(list);
     post.appendChild(pagination);
-    makePagination(totalsemuapage,pagenow);
+    makePagination(totalsemuapage,pagenow,owner_id);
 }
 function gotoPost(postid,ownerid){
     console.log(postid,"post");
@@ -180,7 +180,7 @@ function makePagination(totalPages,page,owner_id=null){
         let beforePage = page - 1;
         let afterPage = page + 1;
         if(page>1){
-            liTag += `<li class="btn prev" onclick="klikPagination(${totalPages},${page-1})"><span><i class="fas fa-angle-left"></i>< Prev</span></li>`;
+            liTag += `<li class="btn prev" onclick="klikPagination(${totalPages},${page-1},${owner_id})"><span><i class="fas fa-angle-left"></i>< Prev</span></li>`;
         }
         if(page>2){
             liTag+=`<li class="numb" onclick="klikPagination(${totalPages},1)"><span>1</span></li>`
@@ -202,24 +202,24 @@ function makePagination(totalPages,page,owner_id=null){
             else{
                 activeLi = "";
             }
-            liTag+=`<li class="numb ${activeLi}" onclick="klikPagination(${totalPages},${i})"><span>${i}</span></li>`
+            liTag+=`<li class="numb ${activeLi}" onclick="klikPagination(${totalPages},${i},${owner_id})"><span>${i}</span></li>`
         }
         if(page<totalPages-1){
             if(page<totalPages-2){
                 liTag+=`<li class="dots"><span>...</span></li>`
             }
-            liTag+=`<li class="numb" onclick="klikPagination(${totalPages},${totalPages})"><span>${totalPages}</span></li>`
+            liTag+=`<li class="numb" onclick="klikPagination(${totalPages},${totalPages},${owner_id})"><span>${totalPages}</span></li>`
         }
         if(page < totalPages){
-            liTag += `<li class="btn next" onclick="klikPagination(${totalPages},${page+1})"><span>Next ><i class="fas fa-angle-right"></i></span></li>`;
+            liTag += `<li class="btn next" onclick="klikPagination(${totalPages},${page+1},${owner_id})"><span>Next ><i class="fas fa-angle-right"></i></span></li>`;
         }
     }
     ulTag.innerHTML = liTag;
 }
 
-function klikPagination(totalPages,page){
-    makePagination(totalPages,page);
-    changePage(page);
+function klikPagination(totalPages,page,owner_id=null){
+    makePagination(totalPages,page,owner_id);
+    changePage(page,owner_id);
 }
 
 function changePage(page,owner_id=null){
