@@ -184,7 +184,7 @@ function makePagination(totalPages,page,owner_id=null){
             liTag += `<li class="btn prev" onclick="klikPagination(${totalPages},${page-1},${owner_id})"><span><i class="fas fa-angle-left"></i>< Prev</span></li>`;
         }
         if(page>2){
-            liTag+=`<li class="numb" onclick="klikPagination(${totalPages},1)"><span>1</span></li>`
+            liTag+=`<li class="numb" onclick="klikPagination(${totalPages},1,${owner_id})"><span>1</span></li>`
             if(page>3){
                 liTag+=`<li class="dots"><span>...</span></li>`
             }
@@ -253,7 +253,7 @@ function changePage(page,owner_id=null){
                 });
                 var totalpost = response.data.count;
                 var totalPage = Math.ceil(totalpost/10);
-                createPost(response.data.data,totalPage,page);
+                createPost(response.data.data,totalPage,page,owner_id);
             }
         } else {
             console.error('Gagal melakukan permintaan');
