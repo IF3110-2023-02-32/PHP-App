@@ -12,8 +12,9 @@ class ReplyPostController extends BaseController{
     }
     public function post($urlParams){
         $postid = $urlParams[1];
-        $owner = $urlParams[0];
+        $owner_user = $urlParams[0];
         $body = $_POST['body'];
+        $owner = $this->srv->getUsernameByPostOwnerId($owner_user);
         $result = $this->srv->replyPost($postid,$owner,$body);
         if($result){
             return json_encode(array(

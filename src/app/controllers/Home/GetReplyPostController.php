@@ -12,7 +12,8 @@ class GetReplyPostController extends BaseController{
     }
     public function get($urlParams){
         $postid = $urlParams[1];
-        $owner = $urlParams[0];
+        $owner_user = $urlParams[0];
+        $owner = $this->srv->getUsernameByPostOwnerId($owner_user);
         $result = $this->srv->getReply($postid,$owner);
         if($result){
             echo json_encode($result);

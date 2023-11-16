@@ -12,7 +12,8 @@ class GetPostIDController extends BaseController{
     }
     public function get($urlParams){
         $postid = $urlParams[1];
-        $owner = $urlParams[0];
+        $owner_username = $urlParams[0];
+        $owner = $this->srv->getUsernameByPostOwnerId($owner_username);
         $result = $this->srv->getPostByID($postid,$owner);
         if($result!=null){
             echo json_encode($result);

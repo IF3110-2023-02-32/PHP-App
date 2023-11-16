@@ -13,7 +13,8 @@ class ClickPostController extends BaseController{
     public function put($urlParams){
         parse_str(file_get_contents('php://input'), $_PUT);
         $post_id = $_PUT['post_id'];
-        $owner_id = $_PUT['owner_id'];
+        $owner_user = $_PUT['owner_id'];
+        $owner_id = $this->srv->getUsernameByPostOwnerId($owner_user);
         $hasil = $this->srv->plusView($post_id,$owner_id);
         if($hasil==true){
             $hasiljson = array(
@@ -26,7 +27,8 @@ class ClickPostController extends BaseController{
         else{
             $hasiljson = array(
                 'status' => 'error',
-                'message' => 'View gagal ditambahkan'
+                'message' => 'View gagal ditambahkan',
+                'data' => $owner_user
             );
             header('Content-Type: application/json');
             return json_encode($hasiljson);  

@@ -228,6 +228,22 @@ class HomeModel
             return false;
         }
     }
+    public function getUsernameByPostOwnerId($owner_id){
+        try{
+            $db = PDOHandler::getInstance()->getPDO();
+            $sql = "SELECT id FROM users WHERE username='$owner_id'";
+            $result = $db->query($sql);
+            if($result){
+                $data = $result->fetch(PDO::FETCH_ASSOC);
+                return $data['id'];
+            }
+            else{
+                return false;
+            }
+        }catch(Exception $e){
+            return false;
+        }
+    }
 }
 
 ?>
