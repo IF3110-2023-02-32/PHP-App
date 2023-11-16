@@ -6,6 +6,8 @@ require_once SRC_ROOT_PATH . "/app/core/FileAccess.php";
 
 require_once SRC_ROOT_PATH . "/app/modelmanagers/PostManager.php";
 
+require_once SRC_ROOT_PATH . "/app/clients/SocmedSoapClient.php";
+
 class PostController extends BaseController
 {
   protected static $instance;
@@ -49,6 +51,12 @@ class PostController extends BaseController
       $user_id,
       $resources
     );
+
+    // send SOAP message when user reached 10th post
+    if ($post_id == 9) {
+      $soapClient = SocmedSoapClient::getInstance();
+      $soapClient.requestUnlocking($_SESSION['id'], $_SESSION['username']);
+    }
   }
 
   protected function post($urlParams)

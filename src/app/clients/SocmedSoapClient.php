@@ -1,6 +1,6 @@
 <?php
 
-require_once SRC_ROOT_PATH . "/utils/SoapWrapper.php";
+require_once SRC_ROOT_PATH . "/app/utils/SoapWrapper.php";
 
 class SocmedSoapClient
 {
@@ -16,14 +16,14 @@ class SocmedSoapClient
 
         $params = array(
             'encoding' => 'UTF-8',
-            'soap_version' => SOAP_1_2,
+            'soap_version' => 'SOAP_1_2',
             'trace' => 1,
             'exceptions' => 1,
             'connection_timeout' => 180,
             'stream_context' => stream_context_create($opts),
         );
  
-        $this->client = new SoapWrapper($_ENV['WSDL_URL'], $params);
+        $this->client = new SoapWrapper($_ENV['MONOLITHIC_SOAP_URL'], $params);
     }
 
     public static function getInstance()

@@ -35,6 +35,7 @@ class LoginModel
                     {
                         $_SESSION['user_id'] = $row['id'];
                         $_SESSION['role'] = $row['role'];
+                        $_SESSION['username'] = $row['username'];
                         $array = array('status' => $row['status'], 'role' => $row['role']);
                         return $array;
                     }
