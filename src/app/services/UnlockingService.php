@@ -1,10 +1,10 @@
 <?php
 
-require_once PROJECT_ROOT_PATH . "/src/bases/BaseService.php";
-require_once PROJECT_ROOT_PATH . "/src/utils/SoapWrapper.php";
-require_once PROJECT_ROOT_PATH . "/src/clients/SocmedSoapClient.php";
-require_once PROJECT_ROOT_PATH . "/src/models/UnlockingModel.php";
-require_once PROJECT_ROOT_PATH . "/src/repositories/UnlockingRepository.php";
+require_once SRC_ROOT_PATH . "/baseclasses/BaseService.php";
+require_once SRC_ROOT_PATH . "/utils/SoapWrapper.php";
+require_once SRC_ROOT_PATH . "/clients/SocmedSoapClient.php";
+require_once SRC_ROOT_PATH . "/models/UnlockingModel.php";
+require_once SRC_ROOT_PATH . "/repositories/UnlockingRepository.php";
 
 class UnlockingService extends BaseSrv {
   protected static $instance;
@@ -24,8 +24,8 @@ class UnlockingService extends BaseSrv {
     return self::$instance;
   }
 
-  public function getAcceptedUnlockingBySocmedId($socmedId) {
-    $unlocksSQL = UnlockingRepository::getInstance()->getAcceptedUnlockingBySocmedId($socmedId);
+  public function getVerifiedUnlockingBySocmedId($socmedId) {
+    $unlocksSQL = UnlockingRepository::getInstance()->getVerifiedUnlockingBySocmedId($socmedId);
 
     $unlocks = [];
     foreach ($unlocksSQL as $unlockSQL) {
@@ -63,11 +63,7 @@ class UnlockingService extends BaseSrv {
     return $subs;
   }
 
-  public function acceptUnlocking($socmed_id, $link_code) {
-    return $this->client->acceptUnlocking($socmed_id, $link_code);
-  }
-
-  public function rejectUnlocking($socmed_id, $link_code) {
-    return $this->client->rejectUnlocking($socmed_id, $link_code);
+  public function verifyUnlocking($socmed_id, $dashboard_id, $link_code) {
+    return $this->client->verifyUnlocking($socmed_id, $dashboard_id, $link_code);
   }
 }

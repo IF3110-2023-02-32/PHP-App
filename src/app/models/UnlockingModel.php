@@ -2,7 +2,7 @@
 
 require_once SRC_ROOT_PATH . "/baseclasses/BaseModel.php";
 
-class SubscriptionModel extends BaseModel
+class UnlockingModel extends BaseModel
 {
   public $socmed_id;
   public $dashboard_id;

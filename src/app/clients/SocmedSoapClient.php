@@ -60,21 +60,12 @@ class SocmedSoapClient
         return $response;
     }
 
-    public function acceptUnlocking($socmed_id, $link_code)
+    public function verifyUnlocking($socmed_id, $dashboard_id, $link_code)
     {
-        $res = $this->client->call("acceptUnlocking", array(
+        $res = $this->client->call("verifyUnlocking", array(
             'arg0' => $socmed_id,
-            'arg1' => null,
+            'arg1' => $dashboard_id,
             'arg2' => $link_code,
-        ));
-        return $res;
-    }
-
-    public function rejectUnlocking($socmed_id, $link_code)
-    {
-        $res = $this->client->call("rejectUnlocking", array(
-            'arg0' => $socmed_id,
-            'arg1' => $link_code,
         ));
         return $res;
     }

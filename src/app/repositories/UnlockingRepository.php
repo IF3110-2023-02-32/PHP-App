@@ -34,7 +34,7 @@ class UnlockingRepository extends BaseRepository{
     return $stmt->fetchAll();
   }
 
-  public function getAcceptedUnlockingBySocmedID($socmed_id) {
+  public function getVerifiedUnlockingBySocmedID($socmed_id) {
     $sql = "SELECT * FROM unlocking WHERE socmed_id = :socmed_id and dashboard_id IS NOT NULL";
     $stmt = $this->pdo->prepare($sql);
 
