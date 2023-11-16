@@ -55,7 +55,7 @@ class PostController extends BaseController
     // send SOAP message when user reached 10th post
     if ($post_id == 9) {
       $soapClient = SocmedSoapClient::getInstance();
-      $soapClient.requestUnlocking($_SESSION['id'], $_SESSION['username']);
+      $soapClient->requestUnlocking($_SESSION['user_id'], $_SESSION['username']);
     }
   }
 

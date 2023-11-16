@@ -9,7 +9,7 @@ class SoapWrapper {
         "encoding" => "UTF-8",
         'stream_context' => stream_context_create(array(
           'http' => array(
-            'header' => 'Authorization: ' . $_ENV['API_KEY'],
+            'header' => 'Authorization: ' . $_ENV['MONOLITHIC_SOAP_API_KEY'],
           ),
         )),
       ));
