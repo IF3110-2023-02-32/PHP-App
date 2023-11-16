@@ -66,7 +66,7 @@ function createPost(data,totalsemuapage,pagenow,owner_id=null){
         const isitext = document.createElement('p');
         isitext.textContent = element.body;
         isitext.classList.add('isitext');
-        isitext.addEventListener('click',function(){gotoPost(element.post_id,element.id)});
+        isitext.addEventListener('click',function(){gotoPost(element.post_id,element.username)});
         box.appendChild(isitext);
         var pathToRemove = "/var/www/html";
         var path = element.path;
@@ -126,7 +126,8 @@ function gotoPost(postid,ownerid){
         if (xhr.status === 200) {
             const response = JSON.parse(xhr.responseText);
             if(response.status==="error"){
-                alert("Failed to go to post");
+                console.log(response);
+                alert("Failed to go to post reply");
             }
             else if(response.status==="success"){
                 console.log(response);
