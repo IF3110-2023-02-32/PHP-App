@@ -45,7 +45,7 @@ class GetAnalyticDataModel
             // $sql4 = "SELECT DATE(created_at) as day, SUM(views) as total from posts WHERE owner_id=$owner GROUP BY day ORDER BY day DESC LIMIT 7";
             // $result4 = $db->query($sql4);
             if($result){
-                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                $data = $result->fetch(PDO::FETCH_ASSOC);
                 return $data;
             }
             else{
