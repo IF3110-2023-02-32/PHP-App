@@ -19,10 +19,10 @@ class GetAnalyticDataModel
     public function getFollows($username, $date){
         try{
             $db = PDOHandler::getInstance()->getPDO();
-            $sql = "SELECT COUNT(*) AS total from follows f INNER JOIN users u ON followed_user_id=id WHERE u.username='$username' AND f.created_at <= '$date'::date";
+            $sql = "SELECT COUNT(*) AS total from follows f INNER JOIN users u ON followed_user_id=id WHERE u.username='$username' AND f.created_at <= '$date'::date+1";
             $result = $db->query($sql);
             if($result){
-                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                $data = $result->fetch(PDO::FETCH_ASSOC);
                 return $data;
             }
             else{
@@ -45,7 +45,7 @@ class GetAnalyticDataModel
             // $sql4 = "SELECT DATE(created_at) as day, SUM(views) as total from posts WHERE owner_id=$owner GROUP BY day ORDER BY day DESC LIMIT 7";
             // $result4 = $db->query($sql4);
             if($result){
-                $data = $result->fetchAll(PDO::FETCH_ASSOC);
+                $data = $result->fetch(PDO::FETCH_ASSOC);
                 return $data;
             }
             else{
@@ -66,12 +66,12 @@ class GetAnalyticDataModel
             if(!$owner) return null;
             $owner = $owner['id'];
 
-            $repliesQuery = "SELECT COUNT(*) AS total FROM posts WHERE refer_type='Reply' AND refer_post_owner=$owner AND refer_post=$post_id AND created_at <= '$date'::date";
+            $repliesQuery = "SELECT COUNT(*) AS total FROM posts WHERE refer_type='Reply' AND refer_post_owner=$owner AND refer_post=$post_id AND created_at <= '$date'::date+1";
             $repliesResult = $db->query($repliesQuery);
             if(is_null($repliesResult)) return null;
             $repliescount = $repliesResult->fetch(PDO::FETCH_ASSOC);
 
-            $likesQuery = "SELECT COUNT(*) AS total FROM likes WHERE post_owner_id=$owner AND post_id=$post_id AND created_at <= '$date'::date";
+            $likesQuery = "SELECT COUNT(*) AS total FROM likes WHERE post_owner_id=$owner AND post_id=$post_id AND created_at <= '$date'::date+1";
             $likesResult = $db->query($likesQuery);
             if(is_null($likesResult)) return null;
             $likescount = $likesResult->fetch(PDO::FETCH_ASSOC);
