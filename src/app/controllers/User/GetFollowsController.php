@@ -3,7 +3,7 @@
 
 
 require_once SRC_ROOT_PATH . "/app/baseclasses/BaseController.php";
-require_once SRC_ROOT_PATH . "/app/models/GetPostModel.php";
+require_once SRC_ROOT_PATH . "/app/models/GetAnalyticDataModel.php";
 
 class GetFollowsController extends BaseController{
     protected static $instance;
@@ -12,14 +12,15 @@ class GetFollowsController extends BaseController{
     }
     public static function getInstance(){
         if(!isset(self::$instance)){
-            self::$instance = new static(GetPostModel::getInstance());
+            self::$instance = new static(GetAnalyticDataModel::getInstance());
         }
         return self::$instance;
     }
     
     public function get($urlParams){
-        $idowner = $urlParams[0];
-        $data = $this->srv->getFollows($idowner);
+        $username = $urlParams[0];
+        $date = $urlParams[1];
+        $data = $this->srv->getFollows($username, $date);
         if($data!=null){
             header('Content-Type: application/json');
             return json_encode(array(
