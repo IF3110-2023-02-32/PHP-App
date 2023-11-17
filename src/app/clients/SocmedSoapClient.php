@@ -38,8 +38,7 @@ class SocmedSoapClient
     {
         $res = $this->client->call("requestUnlocking", array(
             'arg0' => $socmed_id,
-            'arg1' => null,
-            'arg2' => $link_code,
+            'arg1' => $link_code,
         ));
         return $res;
     }
