@@ -36,10 +36,11 @@ class SocmedSoapClient
 
     public function requestUnlocking($socmed_id, $link_code)
     {
+        var_dump($socmed_id);
+        var_dump($link_code);
         $res = $this->client->call("requestUnlocking", array(
-            'arg0' => $socmed_id,
-            'arg1' => null,
-            'arg2' => $link_code,
+            'socmed_id' => $socmed_id,
+            'link_code' => $link_code,
         ));
         return $res;
     }
